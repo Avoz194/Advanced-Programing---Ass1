@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2020-11-03T15:10:39.027Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36" etag="_gUDtcSEoq_095cT--Bq" version="13.8.8" type="github">
+<mxfile host="app.diagrams.net" modified="2020-11-03T15:15:20.130Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36" etag="A76tZcN8Op0j9P4D1bNV" version="13.8.8" type="github">
   <diagram name="Page-1" id="9f46799a-70d6-7492-0946-bef42562c5a5">
-    <mxGraphModel dx="782" dy="1287" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="#ffffff" math="0" shadow="0">
+    <mxGraphModel dx="1303" dy="1578" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="#ffffff" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -12,7 +12,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="78961159f06e98e8-17" value="Session" style="swimlane;html=1;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=20;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=#ffffff;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fillColor=none;fontFamily=Verdana;fontSize=12" parent="1" vertex="1">
-          <mxGeometry x="360" y="-10" width="250" height="352" as="geometry" />
+          <mxGeometry x="400" y="-60" width="250" height="352" as="geometry" />
         </mxCell>
         <mxCell id="78961159f06e98e8-21" value="+Graph g" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="78961159f06e98e8-17" vertex="1">
           <mxGeometry y="20" width="250" height="26" as="geometry" />
@@ -23,10 +23,10 @@
         <mxCell id="78961159f06e98e8-25" value="+ std::vector&amp;lt;Agent*&amp;gt; agents" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="78961159f06e98e8-17" vertex="1">
           <mxGeometry y="72" width="250" height="28" as="geometry" />
         </mxCell>
-        <mxCell id="TVnjsRauS0rYrFXUHcxL-8" value="+ Json graph" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="78961159f06e98e8-17">
+        <mxCell id="TVnjsRauS0rYrFXUHcxL-8" value="+ Json graph" style="text;html=1;strokeColor=#82b366;fillColor=#d5e8d4;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="78961159f06e98e8-17">
           <mxGeometry y="100" width="250" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="TVnjsRauS0rYrFXUHcxL-7" value="+ Json agents" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="78961159f06e98e8-17">
+        <mxCell id="TVnjsRauS0rYrFXUHcxL-7" value="+ Json agents" style="text;html=1;strokeColor=#82b366;fillColor=#d5e8d4;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="78961159f06e98e8-17">
           <mxGeometry y="126" width="250" height="24" as="geometry" />
         </mxCell>
         <mxCell id="78961159f06e98e8-19" value="" style="line;html=1;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="78961159f06e98e8-17" vertex="1">
@@ -35,13 +35,13 @@
         <mxCell id="TVnjsRauS0rYrFXUHcxL-9" value="+ Constructor" style="text;html=1;strokeColor=#b85450;fillColor=#f8cecc;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="78961159f06e98e8-17">
           <mxGeometry y="158" width="250" height="32" as="geometry" />
         </mxCell>
-        <mxCell id="78961159f06e98e8-20" value="+ simulate()" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="78961159f06e98e8-17" vertex="1">
+        <mxCell id="78961159f06e98e8-20" value="+ simulate()" style="text;html=1;strokeColor=#6c8ebf;fillColor=#dae8fc;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="78961159f06e98e8-17" vertex="1">
           <mxGeometry y="190" width="250" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="78961159f06e98e8-27" value="+ addAgent (const Agent&amp;amp; agent)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="78961159f06e98e8-17" vertex="1">
+        <mxCell id="78961159f06e98e8-27" value="+ addAgent (const Agent&amp;amp; agent)" style="text;html=1;strokeColor=#82b366;fillColor=#d5e8d4;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="78961159f06e98e8-17" vertex="1">
           <mxGeometry y="216" width="250" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="TVnjsRauS0rYrFXUHcxL-11" value="+ setGraph (const Graph&amp;amp; graph)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="78961159f06e98e8-17">
+        <mxCell id="TVnjsRauS0rYrFXUHcxL-11" value="+ setGraph (const Graph&amp;amp; graph)" style="text;html=1;strokeColor=#82b366;fillColor=#d5e8d4;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="78961159f06e98e8-17">
           <mxGeometry y="242" width="250" height="26" as="geometry" />
         </mxCell>
         <mxCell id="TVnjsRauS0rYrFXUHcxL-3" value="+ enqueueInfected(int)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="78961159f06e98e8-17">
@@ -123,7 +123,7 @@
           <mxGeometry y="268" width="160" height="26" as="geometry" />
         </mxCell>
         <mxCell id="78961159f06e98e8-69" value="Graph" style="swimlane;html=1;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=#ffffff;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fillColor=none;fontFamily=Verdana;fontSize=12" parent="1" vertex="1">
-          <mxGeometry x="50" y="370" width="210" height="150" as="geometry" />
+          <mxGeometry x="20" y="500" width="210" height="150" as="geometry" />
         </mxCell>
         <mxCell id="78961159f06e98e8-70" value="+ vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; edges" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="78961159f06e98e8-69" vertex="1">
           <mxGeometry y="26" width="210" height="26" as="geometry" />
@@ -185,8 +185,8 @@
         <mxCell id="TVnjsRauS0rYrFXUHcxL-31" value="+virtual act()" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="78961159f06e98e8-108">
           <mxGeometry y="86" width="160" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="TVnjsRauS0rYrFXUHcxL-1" value="JSON" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="10" y="30" width="120" height="80" as="geometry" />
+        <mxCell id="TVnjsRauS0rYrFXUHcxL-1" value="JSON" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="150" y="-20" width="120" height="80" as="geometry" />
         </mxCell>
         <mxCell id="TVnjsRauS0rYrFXUHcxL-6" value="" style="endArrow=classic;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0.875;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="TVnjsRauS0rYrFXUHcxL-1" target="TVnjsRauS0rYrFXUHcxL-9">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -196,19 +196,19 @@
         </mxCell>
         <mxCell id="TVnjsRauS0rYrFXUHcxL-22" value="" style="curved=1;endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" target="TVnjsRauS0rYrFXUHcxL-11">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="610" y="108" as="sourcePoint" />
-            <mxPoint x="610" y="198.99999999999977" as="targetPoint" />
+            <mxPoint x="650" y="58" as="sourcePoint" />
+            <mxPoint x="650" y="148.99999999999977" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="830" y="10" />
-              <mxPoint x="850" y="220" />
+              <mxPoint x="870" y="-40" />
+              <mxPoint x="890" y="170" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="TVnjsRauS0rYrFXUHcxL-26" value="Split Json to 2" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="700" y="130" width="40" height="20" as="geometry" />
+          <mxGeometry x="740" y="80" width="40" height="20" as="geometry" />
         </mxCell>
         <mxCell id="TVnjsRauS0rYrFXUHcxL-27" value="Parse Jsons" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="840" y="110" width="40" height="20" as="geometry" />
+          <mxGeometry x="880" y="60" width="40" height="20" as="geometry" />
         </mxCell>
         <mxCell id="TVnjsRauS0rYrFXUHcxL-28" style="edgeStyle=orthogonalEdgeStyle;html=1;labelBackgroundColor=none;startFill=0;startSize=8;endArrow=diamondThin;endFill=0;endSize=16;fontFamily=Verdana;fontSize=12;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="78961159f06e98e8-27" target="78961159f06e98e8-94">
           <mxGeometry relative="1" as="geometry">
@@ -220,6 +220,15 @@
             <mxPoint x="330" y="230" as="sourcePoint" />
             <mxPoint x="180" y="340" as="targetPoint" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="TVnjsRauS0rYrFXUHcxL-51" value="" style="endArrow=classic;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="78961159f06e98e8-20" target="TVnjsRauS0rYrFXUHcxL-52">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="630" y="260" as="sourcePoint" />
+            <mxPoint x="260" y="143" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TVnjsRauS0rYrFXUHcxL-52" value="&lt;font style=&quot;font-size: 15px&quot;&gt;Cycles&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="230" y="133" width="40" height="20" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
