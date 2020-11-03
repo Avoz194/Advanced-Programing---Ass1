@@ -77,27 +77,27 @@ include CMakeFiles/Project01.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/Project01.dir/flags.make
 
-CMakeFiles/Project01.dir/main.cpp.o: CMakeFiles/Project01.dir/flags.make
-CMakeFiles/Project01.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/spl211/Documents/SPL211/Projects/Project01/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Project01.dir/main.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Project01.dir/main.cpp.o -c /home/spl211/Documents/SPL211/Projects/Project01/main.cpp
+CMakeFiles/Project01.dir/src/main.cpp.o: CMakeFiles/Project01.dir/flags.make
+CMakeFiles/Project01.dir/src/main.cpp.o: ../src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/spl211/Documents/SPL211/Projects/Project01/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Project01.dir/src/main.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Project01.dir/src/main.cpp.o -c /home/spl211/Documents/SPL211/Projects/Project01/src/main.cpp
 
-CMakeFiles/Project01.dir/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Project01.dir/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/spl211/Documents/SPL211/Projects/Project01/main.cpp > CMakeFiles/Project01.dir/main.cpp.i
+CMakeFiles/Project01.dir/src/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Project01.dir/src/main.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/spl211/Documents/SPL211/Projects/Project01/src/main.cpp > CMakeFiles/Project01.dir/src/main.cpp.i
 
-CMakeFiles/Project01.dir/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Project01.dir/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/spl211/Documents/SPL211/Projects/Project01/main.cpp -o CMakeFiles/Project01.dir/main.cpp.s
+CMakeFiles/Project01.dir/src/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Project01.dir/src/main.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/spl211/Documents/SPL211/Projects/Project01/src/main.cpp -o CMakeFiles/Project01.dir/src/main.cpp.s
 
 # Object files for target Project01
 Project01_OBJECTS = \
-"CMakeFiles/Project01.dir/main.cpp.o"
+"CMakeFiles/Project01.dir/src/main.cpp.o"
 
 # External object files for target Project01
 Project01_EXTERNAL_OBJECTS =
 
-Project01: CMakeFiles/Project01.dir/main.cpp.o
+Project01: CMakeFiles/Project01.dir/src/main.cpp.o
 Project01: CMakeFiles/Project01.dir/build.make
 Project01: CMakeFiles/Project01.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/spl211/Documents/SPL211/Projects/Project01/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable Project01"
