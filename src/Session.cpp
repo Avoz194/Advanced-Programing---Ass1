@@ -2,31 +2,41 @@
 #include <fstream>
 #include "../include/json.hpp"
 #include "../include/Session.h"
+#include "../include/Agent.h"
 
 using json = nlohmann::json;
 using namespace std;
 
-Session::Session(const std::string &path) : g(vector<vector<int>>()) {
+Session::Session(const std::string &path) : initialGraph(),g(),treeType() {
 
     //read JSON file
-    ifstream i("path.json");
-    json j;
-    j << i;
-
+    ifstream in("path.json");
+    json inputFile;
+    inputFile << in;
+    //build initial graph
+    Graph initialGraph(inputFile["graph"]);
     //build initial agent list
-    for (auto &elem: j["agents"]) {
-        if (elem[0] = 'V') {
-            addAgent();
+    for (auto &elem: inputFile["agents"]) {
+        if (elem[0] == "V") {
+            addAgent(Virus(elem[1],*this));
         }
-        if (elem[0] = 'C') {
-            addAgent((Agent &) ContactTracer());
+        if (elem[0] == "C") {
+            addAgent(ContactTracer(*this));
         }
     }
-    setGraph(j["graph"])
-    cout << j["graph"] << endl
+    // initial treeType
+    if(inputFile["tree"] =="C") treeType = Cycle;
+    if(inputFile["tree"] =="M") treeType = MaxRank;
+    if(inputFile["tree"] =="R") treeType = Root;
+}
+void Session::createOutput() {
+    json output;
+    output["infected_Nodes"] = infectedList;
+    output["graph"] = g.getEdges();
+    ofstream outFile("~/sessionOutput.json");
+    outFile<<output;
 }
 
-};
 
 
 

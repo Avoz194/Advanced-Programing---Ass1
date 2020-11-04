@@ -6,9 +6,12 @@
 class Graph{
 public:
     Graph(std::vector<std::vector<int>> matrix);
-    
+    Graph(const Graph &copyGraph); //copy constructor
+    Graph(); //empty constructor
+
     void infectNode(int nodeInd);
     bool isInfected(int nodeInd);
+    std::vector<std::vector<int>>& getEdges();
 private:
     std::vector<std::vector<int>> edges;
 };

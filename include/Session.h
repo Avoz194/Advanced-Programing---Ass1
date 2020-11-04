@@ -4,9 +4,6 @@
 #include <vector>
 #include <string>
 #include "Graph.h"
-#include "json.hpp"
-
-using json = nlohmann::json;
 
 class Agent;
 
@@ -27,12 +24,14 @@ public:
     void enqueueInfected(int);
     int dequeueInfected();
     TreeType getTreeType() const;
+    void createOutput();
     
 private:
     Graph g;
     TreeType treeType;
     std::vector<Agent*> agents;
-    json inputGraph;
+    std::vector<int> infectedList;
+    Graph initialGraph;
 };
 
 #endif
