@@ -84,6 +84,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/spl211/Documents/SPL211/Projects/Project01/src/Session.cpp">
+			<Option target="Project01"/>
+		</Unit>
 		<Unit filename="/home/spl211/Documents/SPL211/Projects/Project01/src/main.cpp">
 			<Option target="Project01"/>
 		</Unit>

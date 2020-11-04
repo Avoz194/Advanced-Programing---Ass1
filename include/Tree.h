@@ -13,7 +13,8 @@ public:
 
     static Tree* createTree(const Session& session, int rootLabel);
     virtual int traceTree()=0;
-private:
+
+protected:
     int node;
     std::vector<Tree*> children;
 };

@@ -2,13 +2,15 @@
 #define AGENT_H_
 
 #include <vector>
+#include "Session.h"
 
 class Agent{
 public:
     Agent(Session& session);
     
     virtual void act()=0;
-private:
+
+protected:
     Session& session;
 };
 

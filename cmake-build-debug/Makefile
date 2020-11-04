@@ -143,6 +143,33 @@ Project01/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Project01.dir/build.make CMakeFiles/Project01.dir/build
 .PHONY : Project01/fast
 
+src/Session.o: src/Session.cpp.o
+
+.PHONY : src/Session.o
+
+# target to build an object file
+src/Session.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Project01.dir/build.make CMakeFiles/Project01.dir/src/Session.cpp.o
+.PHONY : src/Session.cpp.o
+
+src/Session.i: src/Session.cpp.i
+
+.PHONY : src/Session.i
+
+# target to preprocess a source file
+src/Session.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Project01.dir/build.make CMakeFiles/Project01.dir/src/Session.cpp.i
+.PHONY : src/Session.cpp.i
+
+src/Session.s: src/Session.cpp.s
+
+.PHONY : src/Session.s
+
+# target to generate assembly for a file
+src/Session.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Project01.dir/build.make CMakeFiles/Project01.dir/src/Session.cpp.s
+.PHONY : src/Session.cpp.s
+
 src/main.o: src/main.cpp.o
 
 .PHONY : src/main.o
@@ -179,6 +206,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Project01"
+	@echo "... src/Session.o"
+	@echo "... src/Session.i"
+	@echo "... src/Session.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

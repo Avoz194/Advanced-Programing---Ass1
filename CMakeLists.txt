@@ -3,4 +3,4 @@ project(Project01)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(Project01 src/main.cpp)
+add_executable(Project01 src/main.cpp src/Session.cpp)
