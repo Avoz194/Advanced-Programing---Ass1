@@ -4,6 +4,9 @@
 #include <vector>
 #include <string>
 #include "Graph.h"
+#include "json.hpp"
+
+using json = nlohmann::json;
 
 class Agent;
 
@@ -29,6 +32,7 @@ private:
     Graph g;
     TreeType treeType;
     std::vector<Agent*> agents;
+    json inputGraph;
 };
 
 #endif
