@@ -84,7 +84,16 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/spl211/Documents/SPL211/Projects/Project01/src/Agent.cpp">
+			<Option target="Project01"/>
+		</Unit>
+		<Unit filename="/home/spl211/Documents/SPL211/Projects/Project01/src/Graph.cpp">
+			<Option target="Project01"/>
+		</Unit>
 		<Unit filename="/home/spl211/Documents/SPL211/Projects/Project01/src/Session.cpp">
+			<Option target="Project01"/>
+		</Unit>
+		<Unit filename="/home/spl211/Documents/SPL211/Projects/Project01/src/Tree.cpp">
 			<Option target="Project01"/>
 		</Unit>
 		<Unit filename="/home/spl211/Documents/SPL211/Projects/Project01/src/main.cpp">
