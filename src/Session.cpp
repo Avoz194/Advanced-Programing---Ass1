@@ -10,9 +10,9 @@ using namespace std;
 Session::Session(const std::string &path) : initialGraph(),g(),treeType() {
 
     //read JSON file
-    ifstream in("path.json");
+    ifstream inP("path.json");
     json inputFile;
-    inputFile << in;
+    inputFile << inP;
     //build initial graph
     Graph initialGraph(inputFile["graph"]);
     //build initial agent list

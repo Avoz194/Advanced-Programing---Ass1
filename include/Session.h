@@ -31,7 +31,7 @@ private:
     TreeType treeType;
     std::vector<Agent*> agents;
     std::vector<int> infectedList;
-    Graph initialGraph;
+    Graph initialGraph; //TODO make sure required, added for input
 };
 
 #endif
