@@ -11,7 +11,7 @@ public:
 
     void infectNode(int nodeInd);
     bool isInfected(int nodeInd);
-    std::vector<std::vector<int>>& getEdges(); //TODO make sure required, added for input
+    const std::vector<std::vector<int>>& getEdges() const; //TODO make sure required, added for input
 private:
     std::vector<std::vector<int>> edges;
 };
