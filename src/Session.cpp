@@ -14,7 +14,7 @@ Session::Session(const std::string &path) : initialGraph(),g(),treeType() {
     json inputFile;
     inputFile << inP;
     //build initial graph
-    Graph initialGraph(inputFile["graph"]);
+    initialGraph=Graph(inputFile["graph"]);
     //build initial agent list
     for (auto &elem: inputFile["agents"]) {
         if (elem[0] == "V") {
@@ -29,6 +29,16 @@ Session::Session(const std::string &path) : initialGraph(),g(),treeType() {
     if(inputFile["tree"] =="M") treeType = MaxRank;
     if(inputFile["tree"] =="R") treeType = Root;
 }
+TreeType Session::getTreeType() const {
+    return this->treeType;
+}
+
+void Session::enqueueInfected(int nodeInd) {
+    infectedList.push_back(nodeInd);
+}
+
+
+
 void Session::createOutput() {
     json output;
     output["infected_Nodes"] = infectedList;
