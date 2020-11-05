@@ -3,13 +3,10 @@
 
 using namespace std;
 
-Graph::Graph() {
-    edges=std::vector<std::vector<int>>();
+Graph::Graph(): edges(std::vector<std::vector<int>>()) {
 }
-Graph::Graph(std::vector<std::vector<int>> matrix) {
-    edges = matrix; //Todo: make sure vector copy constructor works here
+Graph::Graph(std::vector<std::vector<int>> matrix): edges(matrix){
 }
 
-Graph::Graph(const Graph &copyGraph) {
-    this->edges= copyGraph.edges;
+Graph::Graph(const Graph &copyGraph): edges(copyGraph.getEdges()) {
 }

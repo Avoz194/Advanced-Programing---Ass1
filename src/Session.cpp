@@ -7,7 +7,7 @@
 using json = nlohmann::json;
 using namespace std;
 
-Session::Session(const std::string &path) : initialGraph(),g(),treeType() {
+Session::Session(const std::string &path) : initialGraph(),g(),treeType() { //TODO: make sure if needed treeType in this line
 
     //read JSON file
     ifstream inP("path.json");
