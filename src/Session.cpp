@@ -10,13 +10,13 @@ using namespace std;
 Session::Session(const std::string &path) : g(std::vector<std::vector<int>>()),treeType() { //TODO: make sure if needed treeType in this line
 
     //read JSON file
-    ifstream inP("path.json");
+    ifstream inP("config1.json"); //TODO: change config1.json to path eventually
     json inputFile;
     inputFile << inP;
     //build initial graph
     setGraph(Graph(inputFile["graph"])); //TODO: make sure how to handle reference here
     //build initial agent list
-    for (auto &elem: inputFile["agents"]) {
+    for (auto& elem: inputFile["agents"]) {
         if (elem[0] == "V") {
             addAgent(Virus(elem[1],*this));
         }
