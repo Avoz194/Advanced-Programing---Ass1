@@ -10,7 +10,7 @@ using namespace std;
 Session::Session(const std::string &path) : g(std::vector<std::vector<int>>()),treeType() { //TODO: make sure if needed treeType in this line
 
     //read JSON file
-    ifstream inP("config1.json"); //TODO: change config1.json to path eventually
+    ifstream inP(path); //TODO: make sure works in MakeFile
     json inputFile;
     inputFile << inP;
     //build initial graph
@@ -42,7 +42,7 @@ void Session::setGraph(const Graph &graph) {
     g=(graph);
 }
 void Session::addAgent(const Agent &agent) {
-       agents.push_back(&agent);     //TODO:Need to activate clone;
+    agents.push_back(agent.clone());     //TODO:Need to activate clone;
 }
 void Session::simulate() {
     bool isFinished(false);
@@ -60,7 +60,12 @@ void Session::simulate() {
 
 void Session::createOutput() {
     json output;
-    output["infected_Nodes"] = g.; //TODO: need to handle dequeue for full queue or use the g.isInfectedList
+    const std::vector<bool>& infectedBool = g.getIsInfectedList() ;
+    std::vector<int> infectedList;
+    for(int i=0; i<infectedBool.size();i++){
+        if(infectedBool[i]) infectedList.push_back(i);
+    }
+    output["infected_Nodes"] = infectedList; //TODO: need to handle dequeue for full queue or use the g.isInfectedList
     output["graph"] = g.getEdges();
     ofstream outFile("../Output.json");
     outFile<<output;
