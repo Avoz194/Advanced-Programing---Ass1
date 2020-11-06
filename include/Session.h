@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <queue>
 #include "Graph.h"
 
 class Agent;
@@ -25,13 +26,13 @@ public:
     int dequeueInfected();
     TreeType getTreeType() const;
     void createOutput();
+    bool isEndOfSess();
     
 private:
     Graph g;
     TreeType treeType;
     std::vector<Agent*> agents;
-    std::vector<int> infectedList;
-    Graph initialGraph; //TODO make sure required, added for input
+    std::queue<int> infectedQueue;
 };
 
 #endif
