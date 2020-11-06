@@ -18,10 +18,10 @@ Session::Session(const std::string &path) : g(std::vector<std::vector<int>>()),t
     //build initial agent list
     for (auto& elem: inputFile["agents"]) {
         if (elem[0] == "V") {
-            addAgent(Virus(elem[1],*this));
+            agents.push_back(new Virus(elem[1],*this));
         }
         if (elem[0] == "C") {
-            addAgent(ContactTracer(*this));
+            agents.push_back(new ContactTracer(*this));
         }
     }
 
