@@ -37,6 +37,12 @@ TreeType Session::getTreeType() const {
 void Session::enqueueInfected(int nodeInd) {
     infectedQueue.push(nodeInd);
 }
+int Session::dequeueInfected() { //TODO: Check with aviv about this one
+    int toPop = infectedQueue.front();
+    infectedQueue.pop();
+    return toPop;
+}
+
 
 void Session::setGraph(const Graph &graph) {
     g=(graph);
