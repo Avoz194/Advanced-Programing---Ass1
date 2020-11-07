@@ -77,7 +77,7 @@ const bool Session::isEndOfSess() const { //for every virus agent, make sure isI
     bool isSatisfied(true);
     for(int i=0; isSatisfied&i<agents.size();i++){
   //Iterate through the agents list
-        if (agents[i] = dynamic_cast<Virus*>(agents[i])) {//TODO:figure out how to know whether virus or not
+        if (agents[i] == dynamic_cast<Virus*>(agents[i])) {//TODO:figure out how to know whether virus or not
             int index = ((Virus) agents[i]).getIndex();
             if (g.isInfected(index)) { //if agent is virus and not infected return false;
                 isSatisfied = false;
