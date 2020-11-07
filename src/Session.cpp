@@ -39,6 +39,17 @@ Graph& Session::getGraph() {
     return g;
 }
 
+std::queue<int> Session::getInfectedQueue() {
+    return this->infectedQueue
+}
+
+int Session::dequeueInfected() { //TODO: Check with aviv about this one
+    int toPop = infectedQueue.front();
+    infectedQueue.pop();
+    return toPop;
+}
+
+
 void Session::enqueueInfected(int nodeInd) {
     infectedQueue.push(nodeInd);
 }
