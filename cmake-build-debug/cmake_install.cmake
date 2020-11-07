@@ -1,4 +1,4 @@
-# Install script for directory: /home/spl211/Documents/SPL211/Projects/Project01
+# Install script for directory: /home/rs/Desktop/Project01
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/spl211/Documents/SPL211/Projects/Project01/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/rs/Desktop/Project01/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

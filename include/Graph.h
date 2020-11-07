@@ -10,6 +10,7 @@ public:
 
      void infectNode(int nodeInd); //Change nodeStatus to I
     void spreadVirus(int nodeInd); //Change nodeStatus to V
+    void isolateNode(int nodeInd);
     const bool isInfected(int nodeInd) const;
     const std::vector<std::vector<int>>& getEdges() const;
     const std::vector<char>& getNodeStatusList() const;
