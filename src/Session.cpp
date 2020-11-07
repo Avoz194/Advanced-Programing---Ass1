@@ -63,7 +63,7 @@ void Session::setGraph(const Graph &graph) {
 }
 
 void Session::addAgent(const Agent &agent) {
-    pendingAgents.push_back(agent.clone());     //TODO:Need to write clone;
+    pendingAgents.push_back(agent.clone());
 }
 
 void Session::simulate() {

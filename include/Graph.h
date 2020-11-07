@@ -9,7 +9,7 @@ public:
     Graph(const Graph &copyGraph); //copy constructor
 
      void infectNode(int nodeInd); //Change nodeStatus to I
-    void spreadVirus(int nodeInd); //Change nodeStatus to V
+    void spreadVirus(int nodeInd); //Change nodeStatus to C
     void isolateNode(int nodeInd);
     const bool isInfected(int nodeInd) const;
     const bool hasVirus(int nodeInd) const;
@@ -17,7 +17,7 @@ public:
     const std::vector<char>& getNodeStatusList() const;
 private:
     std::vector<std::vector<int>> edges;
-    std::vector<char> nodeStatusList;  // H=Healthy, I= infected (operating virus), V=Virus (not operating virus)
+    std::vector<char> nodeStatusList;  // H=Healthy, I= infected (operating virus), C=carrier (not yet infected)
 };
 
 #endif
