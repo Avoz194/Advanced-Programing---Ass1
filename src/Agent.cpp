@@ -8,12 +8,10 @@ Agent::Agent(Session &session) : session(session) {
         session = this->session;
 }
 Agent * Agent::clone() {
-
 }
 
 
 void Agent::act() {
-
 }
 
 ContactTracer::ContactTracer() {
@@ -23,7 +21,7 @@ ContactTracer::ContactTracer() {
 void ContactTracer::act(Session &session) {
     Graph &g1 = session.getGraph();
     Virus viral =  session.getInfectedQueue().pop();
-    int num = virus.getIndex();
+    int num = viral.getIndex();
     g1.isolateNode(num);
 }
 
@@ -50,6 +48,6 @@ void Virus::act(Session &session) {
 }
 
 const int Virus::getIndex() const { return nodeInd; }
-Agent* Virus::clone() {
+Agent* Virus::clone() const {
     return new Virus(*this));
 }

@@ -9,6 +9,7 @@ public:
     Agent(Session& session);
     
     virtual void act()=0;
+    virtual Agent* clone() const =0;
 
 protected:
     Session& session;
@@ -27,7 +28,7 @@ public:
     Virus(int nodeInd);
     
     virtual void act(Session& session);
-    virtual Agent* clone();
+    virtual Agent* clone() const;
     const int getIndex() const;
 private:
     const int nodeInd;

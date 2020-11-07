@@ -40,7 +40,7 @@ Graph& Session::getGraph() {
 }
 
 std::queue<int> Session::getInfectedQueue() {
-    return this->infectedQueue
+    return this->infectedQueue;
 }
 
 int Session::dequeueInfected() { //TODO: Check with aviv about this one
