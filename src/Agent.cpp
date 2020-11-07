@@ -4,19 +4,27 @@
 
 using namespace std;
 
-Agent::Agent(Session &session, Session &session1) : session(session1) {}
+Agent::Agent(Session &session) : session(session) {
+        session = this->session;
+}
+Agent * Agent::clone() {
+
+}
 
 
 void Agent::act() {
 
 }
 
-ContactTracer::ContactTracer(Session &session) : Agent(session) {
-
+ContactTracer::ContactTracer() {
+    session = this->session;
 }
 
-void ContactTracer::act() {
-
+void ContactTracer::act(Session &session) {
+    Graph &g1 = session.getGraph();
+    Virus viral =  session.getInfectedQueue().pop();
+    int num = virus.getIndex();
+    g1.isolateNode(num);
 }
 
 Virus::Virus(int nodeInd) : nodeInd(nodeInd) {
