@@ -27,11 +27,13 @@ public:
     TreeType getTreeType() const;
     void createOutput();
     const bool isEndOfSess() const;
+    Graph& getGraph() ;
     
 private:
     Graph g;
     TreeType treeType;
     std::vector<Agent*> agents;
+    std::vector<Agent*> pendingAgents;
     std::queue<int> infectedQueue;
 };
 

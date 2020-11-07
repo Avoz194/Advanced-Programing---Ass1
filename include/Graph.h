@@ -6,15 +6,16 @@
 class Graph{
 public:
     Graph(std::vector<std::vector<int>> matrix);
-    Graph(const Graph &copyGraph); //copy constructor //TODO make sure required, added for input
+    Graph(const Graph &copyGraph); //copy constructor
 
-    void infectNode(int nodeInd);
-    const bool isInfected(int nodeInd);
-    const std::vector<std::vector<int>>& getEdges() const; //TODO make sure required, added for input
-    const std::vector<bool>& getIsInfectedList() const;
+     void infectNode(int nodeInd); //Change nodeStatus to I
+    void spreadVirus(int nodeInd); //Change nodeStatus to V
+    const bool isInfected(int nodeInd) const;
+    const std::vector<std::vector<int>>& getEdges() const;
+    const std::vector<char>& getNodeStatusList() const;
 private:
     std::vector<std::vector<int>> edges;
-    std::vector<bool> isInfectedList;
+    std::vector<char> nodeStatusList;  // H=Healthy, I= infected (operating virus), V=Virus (not operating virus)
 };
 
 #endif

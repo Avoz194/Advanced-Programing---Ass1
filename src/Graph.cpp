@@ -4,30 +4,35 @@
 using namespace std;
 
 //base constructor
-Graph::Graph(std::vector<std::vector<int>> matrix) : edges(matrix), isInfectedList(std::vector<bool>(matrix.size())) {
-    for (int i = 0; i <= isInfectedList.size() - 1; i++) {
-        isInfectedList[i] = false;
+Graph::Graph(std::vector<std::vector<int>> matrix) : edges(matrix), nodeStatusList(std::vector<char>(matrix.size())) {
+    for (int i = 0; i <= nodeStatusList.size() - 1; i++) {
+        nodeStatusList[i] = 'H';
     }
 }
 
-//Copy constructor
+//Copy constructor  //TODO: decide whether should copy node's status as well
 Graph::Graph(const Graph &copyGraph) : edges(copyGraph.getEdges()),
-                                       isInfectedList(std::vector<bool>(copyGraph.getEdges().size())) {
-    for (int i = 0; i <= isInfectedList.size() - 1; i++) {
-        isInfectedList[i] = false;
+                                       nodeStatusList(std::vector<char>(copyGraph.getEdges().size())) {
+    for (int i = 0; i <= nodeStatusList.size() - 1; i++) {
+        nodeStatusList[i] = 'H';
     }
 }
 
-const bool Graph::isInfected(int nodeInd) { return isInfectedList[nodeInd]; }
+const bool Graph::isInfected(int nodeInd) const {
+    return nodeStatusList[nodeInd]=='I';
+}
 
 const std::vector<std::vector<int>> &Graph::getEdges() const {
     return edges;
 }
 
-const std::vector<bool> &Graph::getIsInfectedList() const {
-    return isInfectedList;
+const std::vector<char> &Graph::getNodeStatusList() const {
+    return nodeStatusList;
 }
 
 void Graph::infectNode(int nodeInd) {
-    isInfectedList[nodeInd] = true;
+    nodeStatusList[nodeInd] = 'I';
+}
+void Graph::spreadVirus(int nodeInd) {
+    nodeStatusList[nodeInd] = 'V';
 }

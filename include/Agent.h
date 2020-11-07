@@ -24,9 +24,11 @@ public:
 
 class Virus: public Agent{
 public:
-    Virus(int nodeInd, Session& session);
+    Virus(int nodeInd);
     
-    virtual void act();
+    virtual void act(Session& session);
+    virtual Agent& clone();
+    const int getIndex() const;
 private:
     const int nodeInd;
 };

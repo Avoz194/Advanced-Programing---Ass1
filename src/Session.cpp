@@ -7,7 +7,7 @@
 using json = nlohmann::json;
 using namespace std;
 
-Session::Session(const std::string &path) : g(vector<vector<int>>()) { //TODO: make sure if needed treeType in this line
+Session::Session(const std::string &path) : g(vector<vector<int>>()), pendingAgents(vector<Agent*>()) { //TODO: make sure if needed treeType in this line
 
     //read JSON file
     ifstream inP(path); //TODO: make sure works in MakeFile
@@ -19,6 +19,7 @@ Session::Session(const std::string &path) : g(vector<vector<int>>()) { //TODO: m
     for (auto &elem: inputFile["agents"]) {
         if (elem[0] == "V") {
             agents.push_back(new Virus(elem[1], *this));
+            g.spreadVirus(elem[1]);
         }
         if (elem[0] == "C") {
             agents.push_back(new ContactTracer(*this));
@@ -34,6 +35,9 @@ Session::Session(const std::string &path) : g(vector<vector<int>>()) { //TODO: m
 TreeType Session::getTreeType() const {
     return this->treeType;
 }
+Graph& Session::getGraph() {
+    return this->g;
+}
 
 void Session::enqueueInfected(int nodeInd) {
     infectedQueue.push(nodeInd);
@@ -43,22 +47,24 @@ int Session::dequeueInfected() { //TODO: Check with aviv about this one
     infectedQueue.pop();
     return toPop;
 }
-
-
 void Session::setGraph(const Graph &graph) {
     g = (graph);
 }
 
 void Session::addAgent(const Agent &agent) {
-    agents.push_back(agent.clone());     //TODO:Need to activate clone;
+    pendingAgents.push_back(agent.clone());     //TODO:Need to write clone;
 }
 
 void Session::simulate() {
     bool isFinished(false);
     int *cycle = new int(0);
     while (!isFinished) {
+        this->pendingAgents = vector<Agent*>();
         for (Agent *ag:agents) {
             ag->act();
+        }
+        for(Agent *ag:pendingAgents) {
+            agents.push_back(ag);   //TODO:Possible data leak - make sure
         }
         if (isEndOfSess()) isFinished = (true);
         (*cycle)++;
@@ -66,14 +72,14 @@ void Session::simulate() {
     delete cycle;
     createOutput();
 }
-
+/*
 const bool Session::isEndOfSess() const {
     bool isSatisfied(true);
     vector<Agent *>::const_iterator iter;
     iter = agents.begin();
-    const Graph &g1 = getGraph();
+    graph g1 = getGraph();
     while (isSatisfied && iter != agents.end()) { //Iterate through the agents list
-        if (*iter.type = Virus) {//TODO:figure out how to know whether virus or not
+        if (*iter = dynamic_cast<Virus*>(*iter)) {//TODO:figure out how to know whether virus or not
             int index = iter->getIndex();
             if (!g1->isInfected(index)) { //if agent is virus and not infeceted return false;
                 isSatisfied = false;
@@ -93,13 +99,13 @@ const bool Session::isEndOfSess() const {
     return isSatisfied;
 
 }
-
+*/
 void Session::createOutput() {
     json output;
-    const vector<bool> &infectedBool = g.getIsInfectedList();
+    const vector<char> &infectedBool = g.getNodeStatusList();
     vector<int> infectedList;
     for (int i = 0; i < infectedBool.size(); i++) {
-        if (infectedBool[i]) infectedList.push_back(i);
+        if (infectedBool[i]=='I') infectedList.push_back(i);
     }
     output["infected_Nodes"] = infectedList; //TODO: need to handle dequeue for full queue or use the g.isInfectedList
     output["graph"] = g.getEdges();
