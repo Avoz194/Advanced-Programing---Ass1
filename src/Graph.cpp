@@ -21,6 +21,9 @@ Graph::Graph(const Graph &copyGraph) : edges(copyGraph.getEdges()),
 const bool Graph::isInfected(int nodeInd) const {
     return nodeStatusList[nodeInd]=='I';
 }
+const bool Graph::hasVirus(int nodeInd) const {
+    return nodeStatusList[nodeInd]=='V'|nodeStatusList[nodeInd]=='I';
+}
 
 const std::vector<std::vector<int>> &Graph::getEdges() const {
     return edges;

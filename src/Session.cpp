@@ -14,15 +14,15 @@ Session::Session(const std::string &path) : g(vector<vector<int>>()), pendingAge
     json inputFile;
     inputFile << inP;
     //build initial graph
-    setGraph(Graph(inputFile["graph"])); //TODO: make sure how to handle reference here
+    setGraph(Graph(inputFile["graph"]));
     //build initial agent list
     for (auto &elem: inputFile["agents"]) {
         if (elem[0] == "V") {
-            agents.push_back(new Virus(elem[1], *this));
+            agents.push_back(new Virus(elem[1]));
             g.spreadVirus(elem[1]);
         }
         if (elem[0] == "C") {
-            agents.push_back(new ContactTracer(*this));
+            agents.push_back(new ContactTracer());
         }
     }
 
@@ -36,7 +36,7 @@ TreeType Session::getTreeType() const {
     return this->treeType;
 }
 Graph& Session::getGraph() {
-    return this->g;
+    return g;
 }
 
 void Session::enqueueInfected(int nodeInd) {
@@ -63,7 +63,7 @@ void Session::simulate() {
         for (Agent *ag:agents) {
             ag->act();
         }
-        for(Agent *ag:pendingAgents) {
+        for(Agent *ag:pendingAgents) { //following the action of all current agents, add pendingAgents to the list.
             agents.push_back(ag);   //TODO:Possible data leak - make sure
         }
         if (isEndOfSess()) isFinished = (true);
@@ -72,34 +72,31 @@ void Session::simulate() {
     delete cycle;
     createOutput();
 }
-/*
-const bool Session::isEndOfSess() const {
+
+const bool Session::isEndOfSess() const { //for every virus agent, make sure isInfected and make sure all neighbors are infected as well
     bool isSatisfied(true);
-    vector<Agent *>::const_iterator iter;
-    iter = agents.begin();
-    graph g1 = getGraph();
-    while (isSatisfied && iter != agents.end()) { //Iterate through the agents list
-        if (*iter = dynamic_cast<Virus*>(*iter)) {//TODO:figure out how to know whether virus or not
-            int index = iter->getIndex();
-            if (!g1->isInfected(index)) { //if agent is virus and not infeceted return false;
+    for(int i=0; isSatisfied&i<agents.size();i++){
+  //Iterate through the agents list
+        if (agents[i] = dynamic_cast<Virus*>(agents[i])) {//TODO:figure out how to know whether virus or not
+            int index = ((Virus) agents[i]).getIndex();
+            if (g.isInfected(index)) { //if agent is virus and not infected return false;
                 isSatisfied = false;
                 break;
             }
             //iterate through the edges of the graph to make sure neighbors are infected;
             const vector<int> &neighbors = g.getEdges()[index];
             for (int i = 0; i < neighbors.size(); i++) {
-                if (neighbors[i] == 0 || !g1.isInfected(i)) {
+                if (neighbors[i] == 1 & !g.isInfected(i)) {
                     isSatisfied = false;
                     break;
                 }
             }
         }
-        iter++;
     }
     return isSatisfied;
 
 }
-*/
+
 void Session::createOutput() {
     json output;
     const vector<char> &infectedBool = g.getNodeStatusList();

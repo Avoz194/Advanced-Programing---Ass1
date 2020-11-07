@@ -21,14 +21,15 @@ public:
     void simulate();
     void addAgent(const Agent& agent);
     void setGraph(const Graph& graph);
-    
     void enqueueInfected(int);
     int dequeueInfected();
+
     TreeType getTreeType() const;
+    Graph& getGraph() ;
+
     void createOutput();
     const bool isEndOfSess() const;
-    Graph& getGraph() ;
-    
+
 private:
     Graph g;
     TreeType treeType;

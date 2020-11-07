@@ -27,7 +27,7 @@ public:
     Virus(int nodeInd);
     
     virtual void act(Session& session);
-    virtual Agent& clone();
+    virtual Agent* clone();
     const int getIndex() const;
 private:
     const int nodeInd;
