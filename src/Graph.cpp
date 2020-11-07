@@ -32,7 +32,12 @@ const std::vector<std::vector<int>> &Graph::getEdges() const {
 const std::vector<char> &Graph::getNodeStatusList() const {
     return nodeStatusList;
 }
-
+void Graph::isolateNode(int nodeInd) {
+    for (int (i) = 0; (i) < edges.size(); ++(i)) {
+        edges[nodeInd][i]=0;
+        edges[i][nodeInd]=0;
+    }
+}
 void Graph::infectNode(int nodeInd) {
     nodeStatusList[nodeInd] = 'I';
 }
