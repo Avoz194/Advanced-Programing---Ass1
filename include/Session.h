@@ -26,7 +26,7 @@ public:
     int dequeueInfected();
     TreeType getTreeType() const;
     void createOutput();
-    bool isEndOfSess();
+    const bool isEndOfSess() const;
     
 private:
     Graph g;

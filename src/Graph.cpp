@@ -25,7 +25,9 @@ const std::vector<std::vector<int>> &Graph::getEdges() const {
 }
 
 const std::vector<bool> &Graph::getIsInfectedList() const {
-    return isInfectedList; }
-void Graph::infectNode(int nodeInd){
-    isInfectedList[nodeInd]=true;
+    return isInfectedList;
+}
+
+void Graph::infectNode(int nodeInd) {
+    isInfectedList[nodeInd] = true;
 }
