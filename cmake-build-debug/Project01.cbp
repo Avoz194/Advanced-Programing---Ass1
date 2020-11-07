@@ -8,38 +8,38 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/home/spl211/Documents/SPL211/Projects/Project01/cmake-build-debug"/>
+				<Option working_dir="/home/rs/Desktop/Assignments/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j2 -f &quot;/home/spl211/Documents/SPL211/Projects/Project01/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j2 -f &quot;/home/spl211/Documents/SPL211/Projects/Project01/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j2 -f &quot;/home/spl211/Documents/SPL211/Projects/Project01/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j2 -f &quot;/home/spl211/Documents/SPL211/Projects/Project01/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/rs/Desktop/Assignments/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/rs/Desktop/Assignments/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/rs/Desktop/Assignments/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/rs/Desktop/Assignments/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/home/spl211/Documents/SPL211/Projects/Project01/cmake-build-debug"/>
+				<Option working_dir="/home/rs/Desktop/Assignments/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j2 -f &quot;/home/spl211/Documents/SPL211/Projects/Project01/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j2 -f &quot;/home/spl211/Documents/SPL211/Projects/Project01/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j2 -f &quot;/home/spl211/Documents/SPL211/Projects/Project01/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j2 -f &quot;/home/spl211/Documents/SPL211/Projects/Project01/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/rs/Desktop/Assignments/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/rs/Desktop/Assignments/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/rs/Desktop/Assignments/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/rs/Desktop/Assignments/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/home/spl211/Documents/SPL211/Projects/Project01/cmake-build-debug"/>
+				<Option working_dir="/home/rs/Desktop/Assignments/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j2 -f &quot;/home/spl211/Documents/SPL211/Projects/Project01/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j2 -f &quot;/home/spl211/Documents/SPL211/Projects/Project01/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j2 -f &quot;/home/spl211/Documents/SPL211/Projects/Project01/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j2 -f &quot;/home/spl211/Documents/SPL211/Projects/Project01/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/rs/Desktop/Assignments/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/rs/Desktop/Assignments/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/rs/Desktop/Assignments/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/rs/Desktop/Assignments/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Project01">
-				<Option output="/home/spl211/Documents/SPL211/Projects/Project01/cmake-build-debug/Project01" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/spl211/Documents/SPL211/Projects/Project01/cmake-build-debug"/>
+				<Option output="/home/rs/Desktop/Assignments/cmake-build-debug/Project01" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/rs/Desktop/Assignments/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -54,15 +54,15 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j2 -f &quot;/home/spl211/Documents/SPL211/Projects/Project01/cmake-build-debug/Makefile&quot;  VERBOSE=1 Project01"/>
-					<CompileFile command="/usr/bin/make -j2 -f &quot;/home/spl211/Documents/SPL211/Projects/Project01/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j2 -f &quot;/home/spl211/Documents/SPL211/Projects/Project01/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j2 -f &quot;/home/spl211/Documents/SPL211/Projects/Project01/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/rs/Desktop/Assignments/cmake-build-debug/Makefile&quot;  VERBOSE=1 Project01"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/rs/Desktop/Assignments/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/rs/Desktop/Assignments/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/rs/Desktop/Assignments/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Project01/fast">
-				<Option output="/home/spl211/Documents/SPL211/Projects/Project01/cmake-build-debug/Project01" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/spl211/Documents/SPL211/Projects/Project01/cmake-build-debug"/>
+				<Option output="/home/rs/Desktop/Assignments/cmake-build-debug/Project01" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/rs/Desktop/Assignments/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -77,29 +77,29 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j2 -f &quot;/home/spl211/Documents/SPL211/Projects/Project01/cmake-build-debug/Makefile&quot;  VERBOSE=1 Project01/fast"/>
-					<CompileFile command="/usr/bin/make -j2 -f &quot;/home/spl211/Documents/SPL211/Projects/Project01/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j2 -f &quot;/home/spl211/Documents/SPL211/Projects/Project01/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j2 -f &quot;/home/spl211/Documents/SPL211/Projects/Project01/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/rs/Desktop/Assignments/cmake-build-debug/Makefile&quot;  VERBOSE=1 Project01/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/rs/Desktop/Assignments/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/rs/Desktop/Assignments/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/rs/Desktop/Assignments/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/spl211/Documents/SPL211/Projects/Project01/src/Agent.cpp">
+		<Unit filename="/home/rs/Desktop/Assignments/src/Agent.cpp">
 			<Option target="Project01"/>
 		</Unit>
-		<Unit filename="/home/spl211/Documents/SPL211/Projects/Project01/src/Graph.cpp">
+		<Unit filename="/home/rs/Desktop/Assignments/src/Graph.cpp">
 			<Option target="Project01"/>
 		</Unit>
-		<Unit filename="/home/spl211/Documents/SPL211/Projects/Project01/src/Session.cpp">
+		<Unit filename="/home/rs/Desktop/Assignments/src/Session.cpp">
 			<Option target="Project01"/>
 		</Unit>
-		<Unit filename="/home/spl211/Documents/SPL211/Projects/Project01/src/Tree.cpp">
+		<Unit filename="/home/rs/Desktop/Assignments/src/Tree.cpp">
 			<Option target="Project01"/>
 		</Unit>
-		<Unit filename="/home/spl211/Documents/SPL211/Projects/Project01/src/main.cpp">
+		<Unit filename="/home/rs/Desktop/Assignments/src/main.cpp">
 			<Option target="Project01"/>
 		</Unit>
-		<Unit filename="/home/spl211/Documents/SPL211/Projects/Project01/CMakeLists.txt">
+		<Unit filename="/home/rs/Desktop/Assignments/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>
