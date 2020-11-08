@@ -7,7 +7,7 @@
 using json = nlohmann::json;
 using namespace std;
 
-Session::Session(const std::string &path) : g(vector<vector<int>>()), pendingAgents(vector<Agent*>()) { //TODO: make sure if needed treeType in this line
+Session::Session(const std::string &path) : g(vector<vector<int>>()), cycle(0), pendingAgents(vector<Agent*>()) { //TODO: make sure if needed treeType in this line
 
     //read JSON file
     ifstream inP(path); //TODO: make sure works in MakeFile
@@ -33,8 +33,30 @@ Session::Session(const std::string &path) : g(vector<vector<int>>()), pendingAge
     if (inputFile["tree"] == "R") treeType = Root;
 }
 
+
+void Session::simulate() {
+    bool isFinished(false);
+    cycle = 0;
+    while (!isFinished) {
+        this->pendingAgents = vector<Agent*>();
+        for (Agent *ag:agents) {
+            ag->act(*this);
+        }
+        for(Agent *ag:pendingAgents) { //following the action of all current agents, add pendingAgents to the list.
+            agents.push_back(ag);   //TODO:Possible data leak - make sure
+        }
+        if (isEndOfSess()) isFinished = (true);
+        (cycle)++;
+    }
+    createOutput();
+}
+
 TreeType Session::getTreeType() const {
     return this->treeType;
+}
+
+const int Session::getCycle() const {
+    return this->cycle;
 }
 Graph& Session::getGraph() {
     return g;
@@ -57,25 +79,6 @@ void Session::setGraph(const Graph &graph) {
 void Session::addAgent(const Agent &agent) {
     pendingAgents.push_back(agent.clone());
 }
-
-void Session::simulate() {
-    bool isFinished(false);
-    int *cycle = new int(0);
-    while (!isFinished) {
-        this->pendingAgents = vector<Agent*>();
-        for (Agent *ag:agents) {
-            ag->act(*this);
-        }
-        for(Agent *ag:pendingAgents) { //following the action of all current agents, add pendingAgents to the list.
-            agents.push_back(ag);   //TODO:Possible data leak - make sure
-        }
-        if (isEndOfSess()) isFinished = (true);
-        (*cycle)++;
-    }
-    delete cycle;
-    createOutput();
-}
-
 const bool Session::isEndOfSess() const { //for every virus agent, make sure isInfected and make sure all neighbors are infected as well
     bool isSatisfied(true);
     for(int i=0; isSatisfied&i<agents.size();i++){

@@ -31,6 +31,7 @@ public:
     TreeType getTreeType() const;
 
     Graph &getGraph();
+    const int getCycle() const;
 
     void createOutput();
 
@@ -39,6 +40,8 @@ public:
 private:
     Graph g;
     TreeType treeType;
+    int cycle;
+
     std::vector<Agent *> agents;
     std::vector<Agent *> pendingAgents;
     std::queue<int> infectedQueue;

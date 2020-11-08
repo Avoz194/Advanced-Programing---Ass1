@@ -5,7 +5,7 @@
 using namespace std;
 
 //Tree
-Tree::Tree(int rootLabel) : node(rootLabel),children(new std::vector<Tree*> ){ // , children ( new std::vector<Tree*>)?
+Tree::Tree(int rootLabel) : node(rootLabel),children(new vector<Tree*> ()){ // , children ( new std::vector<Tree*>)?
     node = rootLabel;
     children =  std::vector<Tree*> (2); // in the constructor ?
 
@@ -13,30 +13,43 @@ Tree::Tree(int rootLabel) : node(rootLabel),children(new std::vector<Tree*> ){ /
 void Tree::addChild(const Tree &child) {
 
 }
-static Tree* Tree::createTree(const Session &session, int rootLabel) {
-    return 0;
+Tree* Tree::createTree(const Session &session, int rootLabel) {
+    switch (session.getTreeType()) {
+        case MaxRank:{
+            return new MaxRankTree(rootLabel);
+        }
+        case Root:{
+            return new RootTree(rootLabel);
+        }
+        case Cycle:{
+            return new CycleTree(rootLabel, session.getCycle());
+        }
+    }
+
 }
 int Tree::traceTree() {
 
 }
 //CycleTree
-CycleTree::CycleTree(int rootLabel, int currCycle) {
-    node = rootLabel;
-    currCycle = currCycle;
+CycleTree::CycleTree(int rootLabel, int currCycle) : Tree(rootLabel) , currCycle(currCycle) {
+
 }
 int CycleTree::traceTree() {
 
 }
+
+
 //MaxRankTree
-MaxRankTree::MaxRankTree(int rootLabel) {
-    node = rootLabel;
+MaxRankTree::MaxRankTree(int rootLabel) : Tree(rootLabel) {
+
 }
+
 int MaxRankTree::traceTree() {
 
 }
 //RootTree
-RootTree::RootTree(int rootLabel) {
-    node = rootLabel;
+RootTree::RootTree(int rootLabel) : Tree(rootLabel){
+
 }
 int RootTree::traceTree() {
 

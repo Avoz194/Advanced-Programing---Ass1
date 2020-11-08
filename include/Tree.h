@@ -19,6 +19,7 @@ protected:
     std::vector<Tree*> children;
 };
 
+
 class CycleTree: public Tree{
 public:
     CycleTree(int rootLabel, int currCycle);
