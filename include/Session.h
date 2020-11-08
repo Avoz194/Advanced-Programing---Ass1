@@ -8,33 +8,39 @@
 
 class Agent;
 
-enum TreeType{
-  Cycle,
-  MaxRank,
-  Root
+enum TreeType {
+    Cycle,
+    MaxRank,
+    Root
 };
 
-class Session{
+class Session {
 public:
-    Session(const std::string& path);
-    
+    Session(const std::string &path);
+
     void simulate();
-    void addAgent(const Agent& agent);
-    void setGraph(const Graph& graph);
+
+    void addAgent(const Agent &agent);
+
+    void setGraph(const Graph &graph);
+
     void enqueueInfected(int);
+
     int dequeueInfected();
 
     TreeType getTreeType() const;
-    Graph& getGraph() ;
+
+    Graph &getGraph();
 
     void createOutput();
+
     const bool isEndOfSess() const;
 
 private:
     Graph g;
     TreeType treeType;
-    std::vector<Agent*> agents;
-    std::vector<Agent*> pendingAgents;
+    std::vector<Agent *> agents;
+    std::vector<Agent *> pendingAgents;
     std::queue<int> infectedQueue;
 };
 

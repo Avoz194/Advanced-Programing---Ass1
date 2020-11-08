@@ -4,14 +4,15 @@
 
 using namespace std;
 
-Agent::Agent(Session &session) : session(session) {
-        session = this->session;
+Agent::Agent() : session(session) {
+    
 }
-Agent * Agent::clone() {
+
+Agent *Agent::clone() {
 }
 
 
-void Agent::act() {
+void Agent::act(Session &session) {
 }
 
 ContactTracer::ContactTracer() {
@@ -20,8 +21,7 @@ ContactTracer::ContactTracer() {
 
 void ContactTracer::act(Session &session) {
     Graph &g1 = session.getGraph();
-    Virus viral =  session.getInfectedQueue().pop();
-    int num = viral.getIndex();
+    int num = session.dequeueInfected();
     g1.isolateNode(num);
 }
 
@@ -34,7 +34,8 @@ void Virus::act(Session &session) {
         g1.infectNode(getIndex());
         session.enqueueInfected(getIndex());
     }
-    const vector<int> &neighbors(g1.getEdges()[getIndex()]); //go over neighbors to look for a neighbor that isn't infected
+    const vector<int> &neighbors(
+            g1.getEdges()[getIndex()]); //go over neighbors to look for a neighbor that isn't infected
     bool spread = false;
     for (int i = 0; !spread & i < neighbors.size(); i++) {
         if (neighbors[i] == 1 & !g1.hasVirus(i)) {
@@ -42,12 +43,13 @@ void Virus::act(Session &session) {
             Agent *nextVirus = new Virus(i);
             session.addAgent(*nextVirus); //add as an agent
             delete nextVirus; //addAgent clone the nextVirus so need to delete nextVirus
-            spread=true;
+            spread = true;
         }
     }
 }
 
 const int Virus::getIndex() const { return nodeInd; }
-Agent* Virus::clone() const {
+
+Agent *Virus::clone() const {
     return new Virus(*this));
 }
