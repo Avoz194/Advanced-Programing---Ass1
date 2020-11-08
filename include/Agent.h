@@ -6,21 +6,18 @@
 
 class Agent{
 public:
-    Agent(Session& session);
-    
+    Agent();
     virtual void act(Session& session)=0;
     virtual Agent* clone() const =0;
-
-protected:
-    Session& session;
+    virtual const int getIndex() const = 0;
 };
 
 class ContactTracer: public Agent{
 public:
     ContactTracer();
-    
     virtual void act(Session& session);
     virtual Agent* clone() const;
+    virtual const int getIndex() const;
 };
 
 

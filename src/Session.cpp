@@ -17,13 +17,14 @@ Session::Session(const std::string &path) : g(vector<vector<int>>()), pendingAge
     setGraph(Graph(inputFile["graph"]));
     //build initial agent list
     for (auto &elem: inputFile["agents"]) {
-        if (elem[0] == "V") {
+         if (elem[0] == "C") {
+            agents.push_back(new ContactTracer());
+        }
+        else if (elem[0] == "V") {
             agents.push_back(new Virus(elem[1]));
             g.spreadVirus(elem[1]);
         }
-        if (elem[0] == "C") {
-            agents.push_back(new ContactTracer());
-        }
+
     }
 
     // initial treeType
@@ -49,11 +50,6 @@ int Session::dequeueInfected() { //TODO: Check with aviv about this one
 void Session::enqueueInfected(int nodeInd) {
     infectedQueue.push(nodeInd);
 }
-int Session::dequeueInfected() { //TODO: Check with aviv about this one
-    int toPop = infectedQueue.front();
-    infectedQueue.pop();
-    return toPop;
-}
 void Session::setGraph(const Graph &graph) {
     g = (graph);
 }
@@ -68,7 +64,7 @@ void Session::simulate() {
     while (!isFinished) {
         this->pendingAgents = vector<Agent*>();
         for (Agent *ag:agents) {
-            ag->act();
+            ag->act(*this);
         }
         for(Agent *ag:pendingAgents) { //following the action of all current agents, add pendingAgents to the list.
             agents.push_back(ag);   //TODO:Possible data leak - make sure
@@ -85,7 +81,7 @@ const bool Session::isEndOfSess() const { //for every virus agent, make sure isI
     for(int i=0; isSatisfied&i<agents.size();i++){
   //Iterate through the agents list
         if (agents[i] == dynamic_cast<Virus*>(agents[i])) {//TODO:figure out how to know whether virus or not
-            int index = ((Virus) agents[i]).getIndex();
+            int index = agents[i]->getIndex();
             if (g.isInfected(index)) { //if agent is virus and not infected return false;
                 isSatisfied = false;
                 break;

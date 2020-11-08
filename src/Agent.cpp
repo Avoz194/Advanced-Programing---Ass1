@@ -4,19 +4,18 @@
 
 using namespace std;
 
-Agent::Agent() : session(session) {
-
+Agent::Agent()  {
 }
 
-Agent *Agent::clone() {
+Agent* Agent::clone() const {
+
 }
 
 
 void Agent::act(Session &session) {
 }
 
-ContactTracer::ContactTracer() : {
-    session = this->session;
+ContactTracer::ContactTracer() : Agent() {
 }
 
 void ContactTracer::act(Session &session) {
@@ -27,7 +26,9 @@ void ContactTracer::act(Session &session) {
     g1.isolateNode(toIsolate);
 }
 
-Virus::Virus(int nodeInd) : nodeInd(nodeInd) {
+const int ContactTracer::getIndex() const { return -1; }
+
+Virus::Virus(int nodeInd) : Agent(), nodeInd(nodeInd) {
 }
 
 void Virus::act(Session &session) {
@@ -53,5 +54,5 @@ void Virus::act(Session &session) {
 const int Virus::getIndex() const { return nodeInd; }
 
 Agent *Virus::clone() const {
-    return new Virus(*this));
+    return new Virus(*this);
 }
