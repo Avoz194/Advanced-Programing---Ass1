@@ -5,7 +5,7 @@
 using namespace std;
 
 Agent::Agent() : session(session) {
-    
+
 }
 
 Agent *Agent::clone() {
@@ -15,14 +15,16 @@ Agent *Agent::clone() {
 void Agent::act(Session &session) {
 }
 
-ContactTracer::ContactTracer() {
+ContactTracer::ContactTracer() : {
     session = this->session;
 }
 
 void ContactTracer::act(Session &session) {
     Graph &g1 = session.getGraph();
     int num = session.dequeueInfected();
-    g1.isolateNode(num);
+    Tree t1 = g1.BFS(num);
+    int toIsolate = t1.traceTree();
+    g1.isolateNode(toIsolate);
 }
 
 Virus::Virus(int nodeInd) : nodeInd(nodeInd) {

@@ -5,8 +5,9 @@
 using namespace std;
 
 //Tree
-Tree::Tree(int rootLabel) : node(rootLabel){
+Tree::Tree(int rootLabel) : node(rootLabel),children(new std::vector<Tree*> ){ // , children ( new std::vector<Tree*>)?
     node = rootLabel;
+    children =  std::vector<Tree*> (2); // in the constructor ?
 
 }
 void Tree::addChild(const Tree &child) {
