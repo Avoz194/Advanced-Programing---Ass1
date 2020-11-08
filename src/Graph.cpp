@@ -51,7 +51,7 @@ void Graph::spreadVirus(int nodeInd) {
 }
 
 const Tree &Graph::BFS(int nodeInd) const {
-    Tree &bfsTree = new Tree(nodeInd);
+    Tree &bfsTree = Tree::createTree(nodeInd); //TODO:Add reference to session or commit in session
     int numOfNodes = edges.size();
     std::vector<bool> visited(numOfNodes, false);
     std::vector<int> q;
@@ -65,7 +65,7 @@ const Tree &Graph::BFS(int nodeInd) const {
 
         for (int i = 0; i < numOfNodes; i++) {
             if (edges[vis][i] == 1 && (!visited[i])) {
-                bfsTree.addChild(new Tree(i));
+                bfsTree.addChild(Tree::createTree(i)); //TODO:Add reference to session or commit in session
                 q.push_back(i);
                 visited[i] = true;
             }
