@@ -10,6 +10,8 @@ public:
     virtual void act(Session& session)=0;
     virtual Agent* clone() const =0;
     virtual const int getIndex() const = 0;
+
+
 };
 
 class ContactTracer: public Agent{

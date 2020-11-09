@@ -8,7 +8,7 @@
 class Graph{
 public:
     Graph(std::vector<std::vector<int>> matrix);
-    Graph(const Graph &copyGraph); //copy constructor
+   // Graph(const Graph &copyGraph); //copy constructor
 
     void infectNode(int nodeInd); //Change nodeStatus to I
     void spreadVirus(int nodeInd); //Change nodeStatus to C

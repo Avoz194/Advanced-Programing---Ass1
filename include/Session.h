@@ -53,6 +53,9 @@ private:
     std::vector<Agent *> agents;
     std::vector<Agent *> pendingAgents;
     std::queue<int> infectedQueue;
+
+    void clear();
+    std::vector<Agent*> * copy() const;
 };
 
 #endif
