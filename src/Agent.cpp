@@ -21,9 +21,10 @@ ContactTracer::ContactTracer() : Agent() {
 void ContactTracer::act(Session &session) {
     Graph &g1 = session.getGraph();
     int num = session.dequeueInfected();
-    Tree t1 = g1.BFS(num);
-    int toIsolate = t1.traceTree();
+    Tree* t1 = g1.BFS(num, session);
+    int toIsolate = t1->traceTree();
     g1.isolateNode(toIsolate);
+    delete t1;
 }
 
 const int ContactTracer::getIndex() const { return -1; }

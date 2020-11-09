@@ -48,6 +48,7 @@ void Session::simulate() {
         if (isEndOfSess()) isFinished = (true);
         (cycle)++;
     }
+    cycle=0;
     createOutput();
 }
 
@@ -112,7 +113,7 @@ void Session::createOutput() {
     }
     output["infected_Nodes"] = infectedList; //TODO: need to handle dequeue for full queue or use the g.isInfectedList
     output["graph"] = g.getEdges();
-    ofstream outFile("../Output.json");
+    ofstream outFile("./output.json");
     outFile << output;
 }
 

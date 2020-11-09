@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "Tree.h"
+#include "Session.h"
 
 class Graph{
 public:
@@ -16,7 +17,8 @@ public:
     const bool hasVirus(int nodeInd) const;
     const std::vector<std::vector<int>>& getEdges() const;
     const std::vector<char>& getNodeStatusList() const;
-    const Tree & BFS(int nodeInd) const; // bfs path on graph
+    Tree * BFS(int nodeInd, Session& sess) const; // bfs path on graph
+
 private:
     std::vector<std::vector<int>> edges;
     std::vector<char> nodeStatusList;  // H=Healthy, I= infected (operating virus), C=carrier (not yet infected)

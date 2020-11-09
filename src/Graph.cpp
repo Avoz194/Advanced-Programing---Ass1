@@ -50,8 +50,9 @@ void Graph::spreadVirus(int nodeInd) {
     nodeStatusList[nodeInd] = 'C';
 }
 
-const Tree &Graph::BFS(int nodeInd) const {
-    Tree &bfsTree = Tree::createTree(nodeInd); //TODO:Add reference to session or commit in session
+Tree *Graph::BFS(int nodeInd, Session &sess) const {
+    Tree *bfsTree = Tree::createTree(sess,
+                                     nodeInd); //TODO:Review: changed bfsTree to be pointer - Make sure how deletes it later
     int numOfNodes = edges.size();
     std::vector<bool> visited(numOfNodes, false);
     std::vector<int> q;
@@ -67,7 +68,8 @@ const Tree &Graph::BFS(int nodeInd) const {
 
         for (int i = 0; i < numOfNodes; i++) {
             if (edges[vis][i] == 1 && (!visited[i])) {
-                bfsTree.addChild(Tree::createTree(i)); //TODO:Add reference to session or commit in session
+                bfsTree->addChild(
+                        *Tree::createTree(sess, i)); //TODO:Change to vis->    + Review: changed to *Tree in brackets
                 q.push_back(i);
                 visited[i] = true;
             }

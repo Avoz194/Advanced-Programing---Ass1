@@ -12,11 +12,11 @@ void Tree::addChild(const Tree &child) {
     children.push_back(child.clone());
 }
 
-const std::vector<Tree *> &Tree::getChildren() const { //TODO: MRT,CT,RT
+const std::vector<Tree *> &Tree::getChildren() const { //TODO: MRT,CT,RT - Test to make sure activates correct function (maybe add Tree::)
     return children;
 }
 
-const int &Tree::getLabel() const {//TODO: MRT,CT,RT
+const int &Tree::getLabel() const {//TODO: MRT,CT,RT - Test to make sure activates correct function
     return node;
 }
 
@@ -61,7 +61,7 @@ int CycleTree::traceTree() {
 Tree *CycleTree::clone() const {
     return new CycleTree(*this);
 }
-
+/*
 const int &CycleTree::getLabel() const {//TODO: MRT,CT,RT
     return node;
 }
@@ -69,7 +69,7 @@ const int &CycleTree::getLabel() const {//TODO: MRT,CT,RT
 const std::vector<Tree *> &CycleTree::getChildren() const { //TODO: MRT,CT,RT
     return children;
 }
-
+*/
 
 //MaxRankTree
 MaxRankTree::MaxRankTree(int rootLabel) : Tree(rootLabel) {
@@ -112,7 +112,7 @@ int MaxRankTree::traceTree() {
 Tree *MaxRankTree::clone() const {
     return new MaxRankTree(*this);
 }
-
+/*
 const int &MaxRankTree::getLabel() const {//TODO: MRT,CT,RT
     return node;
 }
@@ -120,7 +120,7 @@ const int &MaxRankTree::getLabel() const {//TODO: MRT,CT,RT
 const std::vector<Tree *> &MaxRankTree::getChildren() const { //TODO: MRT,CT,RT
     return children;
 }
-
+*/
 //RootTree
 RootTree::RootTree(int rootLabel) : Tree(rootLabel) {
 
@@ -133,7 +133,7 @@ int RootTree::traceTree() {
 Tree *RootTree::clone() const {
     return new RootTree(*this);
 }
-
+/*
 const int &RootTree::getLabel() const {//TODO: MRT,CT,RT
     return node;
 }
@@ -141,7 +141,7 @@ const int &RootTree::getLabel() const {//TODO: MRT,CT,RT
 const std::vector<Tree *> &RootTree::getChildren() const { //TODO: MRT,CT,RT
     return children;
 }
-
+*/
 //--------------Rule of 5--------------
 //Destructor
 Tree::~Tree() {
@@ -173,7 +173,7 @@ Tree &Tree::operator=(const Tree &other) {
 
 }
 
-}
+
 
 //move assignment
 Tree &Tree::operator=(Tree &&other) {
