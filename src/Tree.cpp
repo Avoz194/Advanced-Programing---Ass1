@@ -95,7 +95,7 @@ int MaxRankTree::traceTree() {
         Tree *tempTree = q[0];
         q.erase(q.begin());
 
-        for (int i = 0; i < tempTree->getChildren().size(); i++) { //loop on tempTree childrens
+        for (int i = 0; i < tempTree->getChildren().size(); i++) { //loop on tempTree children
             if ((tempTree->getChildren()[i]->getChildren().size() > tempMaxRank) &&
                 (!visited[tempTree->getChildren()[i]->getLabel()])) { //first con.
                 tempMaxLabel = tempTree->getChildren()[i]->getLabel();
