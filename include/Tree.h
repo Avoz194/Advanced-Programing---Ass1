@@ -16,6 +16,13 @@ public:
     const std::vector<Tree*>& getChildren() const; // for MRT TODO:to delete if not necessary
     const int &getLabel() const;  // for MRT TODO:to delete if not necessary
 
+    //rule of 5
+    virtual ~Tree(); //destructor
+    Tree(const Tree &other); //copy constructor
+    Tree(Tree &&other); //move constructor
+    Tree& operator=(const Tree &other); //copy assignment
+    Tree& operator=(Tree &&other); //move assignment
+
 protected:
     int node;
     std::vector<Tree*> children;

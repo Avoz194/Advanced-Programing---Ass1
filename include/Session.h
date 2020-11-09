@@ -37,6 +37,14 @@ public:
 
     const bool isEndOfSess() const;
 
+    //rule of 5
+    virtual ~Session(); //destructor
+    Session(const Session &other); //copy constructor
+    Session(Session &&other); //move constructor
+    Session& operator=(const Session &other); //copy assignment
+    Session& operator=(Session &&other); //move assignment
+
+
 private:
     Graph g;
     TreeType treeType;

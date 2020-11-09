@@ -141,3 +141,41 @@ const int &RootTree::getLabel() const {//TODO: MRT,CT,RT
 const std::vector<Tree *> &RootTree::getChildren() const { //TODO: MRT,CT,RT
     return children;
 }
+
+//--------------Rule of 5--------------
+//Destructor
+Tree::~Tree() {
+    for (int i = 0; i < children.size(); i++) {
+        delete children[i];
+        children[i] = nullptr;
+    }
+}
+
+//copyConstructor
+Tree::Tree(const Tree &other) {
+
+}
+
+//move constructor
+Tree::Tree(Tree &&other) {
+
+}
+
+//copy assignment
+Tree &Tree::operator=(const Tree &other) {
+    if (this == &other) {
+        return *this;
+    }
+    if (children != nullptr & (node != nullptr)) {
+        delete children;
+        children = nullptr;
+    }
+
+}
+
+}
+
+//move assignment
+Tree &Tree::operator=(Tree &&other) {
+
+}
