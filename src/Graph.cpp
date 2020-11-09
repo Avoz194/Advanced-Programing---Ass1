@@ -63,6 +63,8 @@ const Tree &Graph::BFS(int nodeInd) const {
     while (!q.empty()) {
         vis = q[0];
 
+        q.erase(q.begin()); // delete the first element in the q
+
         for (int i = 0; i < numOfNodes; i++) {
             if (edges[vis][i] == 1 && (!visited[i])) {
                 bfsTree.addChild(Tree::createTree(i)); //TODO:Add reference to session or commit in session
