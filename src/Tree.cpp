@@ -12,7 +12,8 @@ void Tree::addChild(const Tree &child) {
     children.push_back(child.clone());
 }
 
-const std::vector<Tree *> &Tree::getChildren() const { //TODO: MRT,CT,RT - Test to make sure activates correct function (maybe add Tree::)
+const std::vector<Tree *> &
+Tree::getChildren() const { //TODO: MRT,CT,RT - Test to make sure activates correct function (maybe add Tree::)
     return children;
 }
 
@@ -47,57 +48,45 @@ CycleTree::CycleTree(int rootLabel, int currCycle) : Tree(rootLabel), currCycle(
 
 int CycleTree::traceTree() {
     Tree *tree = this->clone();
+    int cC = this->currCycle;
     int op = node;
-    while (!tree->getChildren().empty()) {
+    while (!tree->getChildren().empty() & cC!=0) {
         tree = tree->getChildren()[0];
         op = tree->getLabel();
+        cC--;
     }
-
     return op;
-
 }
 
 
 Tree *CycleTree::clone() const {
     return new CycleTree(*this);
 }
-/*
-const int &CycleTree::getLabel() const {//TODO: MRT,CT,RT
-    return node;
-}
-
-const std::vector<Tree *> &CycleTree::getChildren() const { //TODO: MRT,CT,RT
-    return children;
-}
-*/
 
 //MaxRankTree
 MaxRankTree::MaxRankTree(int rootLabel) : Tree(rootLabel) {
 
 }
 
-
-int MaxRankTree::traceTree() {
+int MaxRankTree::traceTree() { // due to code clearance and logic we decided to copy the BFS algorithm with different purpose
     Tree *tree = this->clone();
     int tempMaxRank;
     int tempMaxLabel;
 
     std::vector<bool> visited(false);
-    std::vector<Tree *> q;
-
+    std::deque<Tree *> q;
     q.push_back(tree);
 
     visited[this->node] = true;
     tempMaxLabel = q[0]->getLabel();
     tempMaxRank = this->getChildren().size();
-
     while (!q.empty()) {
         Tree *tempTree = q[0];
-        q.erase(q.begin());
+        q.pop_front();
 
         for (int i = 0; i < tempTree->getChildren().size(); i++) { //loop on tempTree children
             if ((tempTree->getChildren()[i]->getChildren().size() > tempMaxRank) &&
-                (!visited[tempTree->getChildren()[i]->getLabel()])) { //first con.
+                (!visited[tempTree->getChildren()[i]->getLabel()])) {
                 tempMaxLabel = tempTree->getChildren()[i]->getLabel();
                 tempMaxRank = tempTree->getChildren()[i]->getChildren().size();
                 tempTree = tempTree->getChildren()[i];
@@ -112,16 +101,6 @@ int MaxRankTree::traceTree() {
 Tree *MaxRankTree::clone() const {
     return new MaxRankTree(*this);
 }
-/*
-const int &MaxRankTree::getLabel() const {//TODO: MRT,CT,RT
-    return node;
-}
-
-const std::vector<Tree *> &MaxRankTree::getChildren() const { //TODO: MRT,CT,RT
-    return children;
-}
-*/
-//RootTree
 RootTree::RootTree(int rootLabel) : Tree(rootLabel) {
 
 }
@@ -133,18 +112,11 @@ int RootTree::traceTree() {
 Tree *RootTree::clone() const {
     return new RootTree(*this);
 }
-/*
-const int &RootTree::getLabel() const {//TODO: MRT,CT,RT
-    return node;
-}
 
-const std::vector<Tree *> &RootTree::getChildren() const { //TODO: MRT,CT,RT
-    return children;
-}
-*/
-//--------------Rule of 5--------------
+
+//-----------------------------------------------------Rule of 5--------------------------------------------------
 //Destructor
-void Tree::clear(){
+void Tree::clear() {
     for (int i = 0; i < children.size(); i++) {
         delete children[i];
         children[i] = nullptr;
@@ -156,44 +128,42 @@ Tree::~Tree() {
 }
 
 //copyConstructor
-Tree::Tree(const Tree &other) :node(other.node) , children(other.children) {
-        for (Tree * tc :other.children){
-            children.push_back(tc->clone());
-        }
+Tree::Tree(const Tree &other) : node(other.node), children(other.children) {
+    for (Tree *tc :other.children) {
+        children.push_back(tc->clone());
+    }
 }
 
 //copy assignment
-Tree &Tree::operator=(const Tree &other) {
-    if (this == &other) {
+Tree &Tree::operator=(Tree *other) {
+    if (this == &other) {  // how to change this one //TODO: ?
         return *this;
     }
-    if ((!(children.empty())) & (node >0)) {
+    if ((!(children.empty())) & (node > 0)) {
         for (int i = 0; i < children.size(); i++) {
             delete children[i];
             children[i] = nullptr;
         }
     }
-    node = other.node;
-    children = other.children;
-    for (Tree * tT:other.children){
+    node = other->node;
+    children = other->children;
+    for (Tree *tT:other->children) {
         children.push_back(tT->clone());
     }
-
 }
 
 //move constructor
-Tree::Tree(Tree &&other) : node(other.node) , children(other.getChildren()) {
+Tree::Tree(Tree &&other) : node(other.node), children(other.getChildren()) {
     other.clear();
 }
 
-
 //move assignment
 Tree &Tree::operator=(Tree &&other) {
-    if(!(children.empty())){
+    if (!(children.empty())) {
         clear();
     }
     children = other.getChildren();
     node = other.getLabel();
-
     return *this;
 }
+//-------------------------------------------------end Rule of 5--------------------------------------------------
