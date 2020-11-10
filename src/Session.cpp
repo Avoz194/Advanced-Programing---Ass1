@@ -8,7 +8,7 @@ using json = nlohmann::json;
 using namespace std;
 
 Session::Session(const std::string &path) : g(vector<vector<int>>()), cycle(0), pendingAgents(
-        vector<Agent *>()) { //TODO: make sure if needed treeType in this line
+        vector<Agent *>(), infectedQueue(queue<int>()) { //TODO: make sure if needed treeType in this line
 
     //read JSON file
     ifstream inP(path); //TODO: make sure works in MakeFile
@@ -150,7 +150,7 @@ void Session::clear() {
 
 Session::~Session() {
     clear();
-};
+}
 
 //copy constructor
 
@@ -192,7 +192,6 @@ Session::Session(Session &&other) {}
 
 //move assignment
 Session::Session &operator=(Session &&other) {}
-
 
 
 
