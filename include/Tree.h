@@ -18,10 +18,11 @@ public:
 
     //rule of 5
     void clear();
+    void copy(const std::vector<Tree *>& other_children, const int& other_node);
     virtual ~Tree(); //destructor
     Tree(const Tree &other); //copy constructor
     Tree(Tree &&other); //move constructor
-    Tree& operator=(Tree *other); //copy assignment
+    Tree& operator=(Tree &other); //copy assignment
     Tree& operator=(Tree &&other); //move assignment
 
 protected:

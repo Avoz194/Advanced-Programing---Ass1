@@ -123,53 +123,46 @@ void Tree::clear() {
             children[i] = nullptr;
         }
     }
+    children.clear();
 }
 Tree::~Tree() {
     clear();
 }
 //copyConstructor
-
-
-Tree::Tree(const Tree &other) : node(other.node), children(other.children) {
-    for (Tree *tc :other.children) {
-        children.push_back(tc->clone());
+void Tree::copy(const vector<Tree *> &other_children , const int &other_node) {
+    children = other_children;
+    node = other_node;
+    for (int i = 0; i < other_children.size() & !(other_children.empty()); i++) {
+            children.push_back(other_children[i]->clone());
     }
+}
+Tree::Tree(const Tree &other) : node(other.node), children(other.children) {
+    copy(other.children,other.node);
 }
 
 //copy assignment
-Tree &Tree::operator=(Tree *other) {
-//    if (this == &other) {  // how to change this one //TODO: ?
-//        return *this;
-//    }
-    clear();
-    if ((!(children.empty())) & (node > 0)) {
-        for (int i = 0; i < children.size(); i++) {
-            delete children[i];
-            children[i] = nullptr;
-        }
+Tree &Tree::operator=(Tree& other) {
+    if (this == &other) {  // how to change this one //TODO: ? i donnnnnnt knowwwww
+        return *this;
     }
-    node = other->node;
-    children = other->children;
-    for (Tree *tT:other->children) {
-        children.push_back(tT->clone());
-    }
+    other.clear();
+    copy(other.children, other.node);
     return *this;
 }
 
 //move constructor
-Tree::Tree(Tree &&other) : node(other.node), children(other.getChildren()) {
+Tree::Tree(Tree&& other) : node(other.node), children(other.getChildren()) {
     other.clear();
 }
-
 //move assignment
-Tree &Tree::operator=(Tree &&other) {
+Tree &Tree::operator=(Tree&& other) {
     if (!(children.empty())) {
         clear();
     }
     children = other.getChildren();
     node = other.getLabel();
-
-    other.children.empty();
+    other.children.clear();
     return *this;
 }
+
 //-------------------------------------------------end Rule of 5--------------------------------------------------
