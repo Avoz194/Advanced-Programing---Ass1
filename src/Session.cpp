@@ -189,10 +189,37 @@ Session &Session::operator=(const Session &other) {
 }
 
 //move constructor
-Session::Session(Session &&other) {}
+Session::Session(Session &&other) :g(vector<vector<int>>()) {
+    g=other.g;
+    treeType=other.treeType;
+    cycle=other.cycle;
+    agents=other.agents;
+    pendingAgents=other.pendingAgents;
+    infectedQueue=other.infectedQueue;
+}
 
 //move assignment
-Session::Session &operator=(Session &&other) {}
+Session& Session::operator=(Session &&other) {
+    if(this!=&other){
+        clear();
+        //Steal pointers
+        g=other.g;
+        treeType=other.treeType;
+        cycle=other.cycle;
+        agents=other.agents;
+        pendingAgents=other.pendingAgents;
+        infectedQueue=other.infectedQueue;
+
+        //change to null
+        other.g= nullptr;
+        other.treeType = nullptr;
+        other.cycle = 0;
+        other.agents=nullptr;
+        other.pendingAgents=nullptr;
+        other.infectedQueue = nullptr;
+    }
+    return *this;
+}
 
 
 
