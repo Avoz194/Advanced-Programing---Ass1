@@ -3,7 +3,6 @@
 
 #include <vector>
 #include "Tree.h"
-#include "Session.h"
 
 class Graph{
 public:
