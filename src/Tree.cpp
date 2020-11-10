@@ -67,36 +67,32 @@ MaxRankTree::MaxRankTree(int rootLabel) : Tree(rootLabel) {
 
 }
 
-int MaxRankTree::traceTree() { // due to code clearance and logic we decided to copy the BFS algorithm with different purpose
-  //  Tree *tree = this->clone();
+Tree *MaxRankTree::clone() const {
+    return new MaxRankTree(*this);
+}
 
-    std::vector<bool> visited(false);
+int MaxRankTree::traceTree() { // commit BFS travel over the tree (due to code clearance decided not to add to BFS function logic)
+    //  Tree *tree = this->clone();
+
     std::deque<Tree *> q;
     q.push_back(this);
-
-    visited[node] = true;
     int tempMaxLabel = q[0]->getLabel();
     int tempMaxRank = this->getChildren().size();
     while (!q.empty()) {
         Tree *tempTree = q[0];
         q.pop_front();
-
         for (int i = 0; i < tempTree->getChildren().size(); i++) { //loop on tempTree children
             if ((tempTree->getChildren()[i]->getChildren().size() > tempMaxRank) &&
-                (!visited[tempTree->getChildren()[i]->getLabel()])) {
+                (tempTree->getChildren()[i]->getLabel()) )
+            {
                 tempMaxLabel = tempTree->getChildren()[i]->getLabel();
                 tempMaxRank = tempTree->getChildren()[i]->getChildren().size();
                 tempTree = tempTree->getChildren()[i];
                 q.push_back(tempTree);
-                visited[tempMaxLabel] = true;
             }
         }
     }
     return tempMaxLabel;
-}
-
-Tree *MaxRankTree::clone() const {
-    return new MaxRankTree(*this);
 }
 RootTree::RootTree(int rootLabel) : Tree(rootLabel) {
 

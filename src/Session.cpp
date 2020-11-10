@@ -71,10 +71,14 @@ Graph &Session::getGraph() {
 }
 
 int Session::dequeueInfected() { //TODO: Check with aviv about this one
-    int toPop = infectedQueue.front();
-    infectedQueue.pop();
-    return toPop;
+    if(!infectedQueue.empty()){
+        int toPop = infectedQueue.front();
+        infectedQueue.pop();
+        return toPop;
+    }
+    return -1;
 }
+
 
 
 void Session::enqueueInfected(int nodeInd) {
@@ -96,7 +100,7 @@ Session::isEndOfSess() const { //for every virus agent, make sure isInfected and
         //Iterate through the agents list
         if (agents[i] == dynamic_cast<Virus *>(agents[i])) {//TODO:figure out how to know whether virus or not
             int index = agents[i]->getIndex();
-            if (g.isInfected(index)) { //if agent is virus and not infected return false;
+            if (!g.isInfected(index)) { //if agent is virus and not infected return false;
                 isSatisfied = false;
                 break;
             }
@@ -121,10 +125,10 @@ void Session::createOutput() {
     for (int i = 0; i < infectedBool.size(); i++) {
         if (infectedBool[i] == 'I') infectedList.push_back(i);
     }
-    output["infected_Nodes"] = infectedList; //TODO: need to handle dequeue for full queue or use the g.isInfectedList
+    output["infected"] = infectedList;
     output["graph"] = g.getEdges();
-    ofstream outFile("./output.json");
-    outFile << output;
+    ofstream outFile("../output.json"); //TODO:: change to . instead of .. before upload
+    outFile<< output;
 }
 
 //rule of 5

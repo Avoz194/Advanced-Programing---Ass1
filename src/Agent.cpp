@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Agent::Agent()  = default;
+Agent::Agent() = default;
 
 void Agent::act(Session &session) {
 }
@@ -15,14 +15,17 @@ ContactTracer::ContactTracer() : Agent() {
 void ContactTracer::act(Session &session) {
     Graph &g1 = session.getGraph();
     int num = session.dequeueInfected();
-    Tree* t1 = g1.BFS(num, session);
-    int toIsolate = t1->traceTree();
-    g1.isolateNode(toIsolate);
-    delete t1;
+    if (num != -1) {
+        Tree *t1 = g1.BFS(num, session);
+        int toIsolate = t1->traceTree();
+        g1.isolateNode(toIsolate);
+        delete t1;
+    }
 }
 
 const int ContactTracer::getIndex() const { return -1; }
-Agent* ContactTracer::clone() const { return new ContactTracer();}
+
+Agent *ContactTracer::clone() const { return new ContactTracer(); }
 
 
 Virus::Virus(int nodeInd) : Agent(), nodeInd(nodeInd) {
