@@ -38,7 +38,7 @@ Tree *Tree::createTree(const Session &session, int rootLabel) {
 }
 
 int Tree::traceTree() { //TODO: what to return here ?
-
+    return 0;
 }
 
 //CycleTree
@@ -50,7 +50,7 @@ int CycleTree::traceTree() {
     Tree *tree = this->clone();
     int cC = this->currCycle;
     int op = node;
-    while (!tree->getChildren().empty() & cC!=0) {
+    while (!tree->getChildren().empty() & (cC!=0)) {
         tree = tree->getChildren()[0];
         op = tree->getLabel();
         cC--;
@@ -117,7 +117,7 @@ Tree *RootTree::clone() const {
 //-----------------------------------------------------Rule of 5--------------------------------------------------
 //Destructor
 void Tree::clear() {
-    for (int i = 0; i < children.size() & !(children.empty()); i++) {
+    for (int i = 0;( i < children.size() )& !(children.empty()); i++) {
         if(children[i]!= nullptr){
             children[i]->clear();
             children[i] = nullptr;
@@ -132,7 +132,7 @@ Tree::~Tree() {
 void Tree::copy(const vector<Tree *> &other_children , const int &other_node) {
     children = other_children;
     node = other_node;
-    for (int i = 0; i < other_children.size() & !(other_children.empty()); i++) {
+    for (int i = 0; (i < other_children.size()) & !(other_children.empty()); i++) {
             children.push_back(other_children[i]->clone());
     }
 }

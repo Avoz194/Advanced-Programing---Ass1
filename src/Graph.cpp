@@ -1,8 +1,6 @@
 #include <iostream>
 #include "../include/Graph.h"
 #include "../include/Tree.h"
-#include "../include/Session.h"
-
 
 using namespace std;
 

@@ -1,12 +1,12 @@
 #All Targets
-all: project
+all: cTrace
 
 #Tool invocations
-project: bin/main.o bin/Session.o bin/Agent.o bin/Graph.o bin/Tree.o
-		@echo 'Building target: project'
+cTrace: bin/main.o bin/Session.o bin/Agent.o bin/Graph.o bin/Tree.o
+		@echo 'Building target: cTrace'
 		@echo 'Invoking: C++ Linker'
 		g++ -o bin/project bin/Session.o bin/Agent.o bin/Graph.o bin/Tree.o
-		@echo 'Finished building target: project'
+		@echo 'Finished building target: cTrace'
 		@echo ' '
 
 #Depends on the source and header files
