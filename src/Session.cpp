@@ -7,7 +7,8 @@
 using json = nlohmann::json;
 using namespace std;
 
-Session::Session(const std::string &path) : g(vector<vector<int>>()), cycle(0), pendingAgents(
+Session::Session(const std::string &path) : g(vector<vector<int>>()), cycle(0), agents(
+        vector<Agent *>()), pendingAgents(
         vector<Agent *>()), infectedQueue(queue<int>()) { //TODO: make sure if needed treeType in this line
 
     //read JSON file
@@ -156,7 +157,7 @@ Session::~Session() {
 
 void Session::copy(const Graph &other_g, const TreeType &other_treeType, const int &other_cycle,
                    const vector<Agent *> &other_agents, const vector<Agent *> &other_pendingAgents,
-                   const queue<int> &other_infectedQueue)  {
+                   const queue<int> &other_infectedQueue) { //Didn't pass session object to avoid unnecessary getters creation
     g = other_g; //Todo - make sure it's not a pointer but assignment operator
     treeType = other_treeType;
     cycle = other_cycle;
@@ -173,8 +174,8 @@ void Session::copy(const Graph &other_g, const TreeType &other_treeType, const i
 }
 
 
-Session::Session(const Session &other): g(vector<vector<int>>()){
-    copy(other.g,other.treeType,other.cycle, other.agents, other.pendingAgents, other.infectedQueue);
+Session::Session(const Session &other) : g(vector<vector<int>>()) {
+    copy(other.g, other.treeType, other.cycle, other.agents, other.pendingAgents, other.infectedQueue);
 }
 
 //copy assignment
@@ -184,40 +185,32 @@ Session &Session::operator=(const Session &other) {
     }
     //Todo:add safety
     clear();
-    copy(other.g,other.treeType,other.cycle, other.agents, other.pendingAgents, other.infectedQueue);
+    copy(other.g, other.treeType, other.cycle, other.agents, other.pendingAgents, other.infectedQueue);
     return *this;
 }
 
 //move constructor
-Session::Session(Session &&other) :g(vector<vector<int>>()) {
-    g=other.g;
-    treeType=other.treeType;
-    cycle=other.cycle;
-    agents=other.agents;
-    pendingAgents=other.pendingAgents;
-    infectedQueue=other.infectedQueue;
+Session::Session(Session &&other) : g(std::move(other.g)), treeType(other.treeType), cycle(other.cycle),
+                                    agents(std::move(other.agents)), pendingAgents(std::move(other.pendingAgents)),
+                                    infectedQueue(std::move(other.infectedQueue)) {
+    other.agents.clear();
+    other.pendingAgents.clear();
 }
 
 //move assignment
-Session& Session::operator=(Session &&other) {
-    if(this!=&other){
+Session &Session::operator=(Session &&other) {
+    if (this != &other) {
         clear();
         //Steal pointers
-        g=other.g;
-        treeType=other.treeType;
-        cycle=other.cycle;
-        agents=other.agents;
-        pendingAgents=other.pendingAgents;
-        infectedQueue=other.infectedQueue;
+        g= std::move(other.g);
+        treeType = other.treeType;
+        cycle = other.cycle;
+        agents = std::move(other.agents);
+        pendingAgents = std::move(other.pendingAgents);
+        infectedQueue = std::move(other.infectedQueue);
 
-        //change to null
-        //other.g= nullptr;
-       // other.treeType = nullptr;
-        //other.infectedQueue = queue<int>();;
-
-        other.cycle = 0;
-        other.agents=vector<Agent*>(0);;
-        other.pendingAgents=vector<Agent*>(0);
+        other.agents.clear();
+        other.pendingAgents.clear();
     }
     return *this;
 }
