@@ -19,7 +19,7 @@ public:
     ContactTracer();
     virtual void act(Session& session);
     virtual Agent* clone() const;
-    virtual const int getIndex() const;
+    const int getIndex() const;
 };
 
 

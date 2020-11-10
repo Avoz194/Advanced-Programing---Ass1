@@ -4,10 +4,9 @@
 
 using namespace std;
 
-Agent::Agent()  {
-}
+Agent::Agent()  = default;
 
-Agent* Agent::clone() const {
+Agent* Agent::clone() const { //TODO: what to return ?
 
 }
 
@@ -43,7 +42,7 @@ void Virus::act(Session &session) {
     const vector<int> &neighbors(
             g1.getEdges()[getIndex()]); //go over neighbors to look for a neighbor that isn't infected
     bool spread = false;
-    for (int i = 0; !spread & i < neighbors.size(); i++) {
+    for (int i = 0; !spread & (i < neighbors.size()); i++) {
         if (neighbors[i] == 1 & !g1.hasVirus(i)) {
             g1.spreadVirus(i);  //spread the virus to node i
             Agent *nextVirus = new Virus(i);
