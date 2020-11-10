@@ -2,7 +2,7 @@
 all: project
 
 #Tool invocations
-project: bin/Session.o bin/Agent.o bin/Graph.o bin/Tree.o
+project: bin/main.o bin/Session.o bin/Agent.o bin/Graph.o bin/Tree.o
 		@echo 'Building target: project'
 		@echo 'Invoking: C++ Linker'
 		g++ -o bin/project bin/Session.o bin/Agent.o bin/Graph.o bin/Tree.o
@@ -10,17 +10,20 @@ project: bin/Session.o bin/Agent.o bin/Graph.o bin/Tree.o
 		@echo ' '
 
 #Depends on the source and header files
+bin/Main.o: src/Main.cpp
+		g++ -g -Wall -Weffc++ -std=c++11 -c -Iinclude -o bin/Main.o src/Main.cpp
+
 bin/Session.o: src/Session.cpp
-		g++ -g -Wall -Weffc++ -std+c++11 -c -Iinclude -o bin/Session.o src/Session.cpp
+		g++ -g -Wall -Weffc++ -std=c++11 -c -Iinclude -o bin/Session.o src/Session.cpp
 
 bin/Agent.o: src/Agent.cpp
-		g++ -g -Wall -Weffc++ -std+c++11 -c -Iinclude -o bin/Agent.o src/Agent.cpp
+		g++ -g -Wall -Weffc++ -std=c++11 -c -Iinclude -o bin/Agent.o src/Agent.cpp
 
 bin/Graph.o: src/Graph.cpp
-		g++ -g -Wall -Weffc++ -std+c++11 -c -Iinclude -o bin/Graph.o src/Graph.cpp
+		g++ -g -Wall -Weffc++ -std=c++11 -c -Iinclude -o bin/Graph.o src/Graph.cpp
 
 bin/Tree.o: src/Tree.cpp
-		g++ -g -Wall -Weffc++ -std+c++11 -c -Iinclude -o bin/Tree.o src/Tree.cpp
+		g++ -g -Wall -Weffc++ -std=c++11 -c -Iinclude -o bin/Tree.o src/Tree.cpp
 
 #Clean the build directory
 clean:

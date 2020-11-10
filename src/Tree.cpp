@@ -117,17 +117,19 @@ Tree *RootTree::clone() const {
 //-----------------------------------------------------Rule of 5--------------------------------------------------
 //Destructor
 void Tree::clear() {
-    for (int i = 0; i < children.size(); i++) {
-        delete children[i];
-        children[i] = nullptr;
+    for (int i = 0; i < children.size() & !(children.empty()); i++) {
+        if(children[i]!= nullptr){
+            children[i]->clear();
+            children[i] = nullptr;
+        }
     }
 }
-
 Tree::~Tree() {
     clear();
 }
-
 //copyConstructor
+
+
 Tree::Tree(const Tree &other) : node(other.node), children(other.children) {
     for (Tree *tc :other.children) {
         children.push_back(tc->clone());
