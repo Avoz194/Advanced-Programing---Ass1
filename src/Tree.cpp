@@ -136,9 +136,10 @@ Tree::Tree(const Tree &other) : node(other.node), children(other.children) {
 
 //copy assignment
 Tree &Tree::operator=(Tree *other) {
-    if (this == &other) {  // how to change this one //TODO: ?
-        return *this;
-    }
+//    if (this == &other) {  // how to change this one //TODO: ?
+//        return *this;
+//    }
+    clear();
     if ((!(children.empty())) & (node > 0)) {
         for (int i = 0; i < children.size(); i++) {
             delete children[i];
@@ -150,6 +151,7 @@ Tree &Tree::operator=(Tree *other) {
     for (Tree *tT:other->children) {
         children.push_back(tT->clone());
     }
+    return *this;
 }
 
 //move constructor

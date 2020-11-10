@@ -55,7 +55,8 @@ private:
     std::queue<int> infectedQueue;
 
     void clear();
-    std::vector<Agent*> * copy() const;
+    void copy(const Graph& other_g, const TreeType& other_treeType, const int& other_cycle, const std::vector<Agent *>& other_agents,
+    const std::vector<Agent *>& other_pendingAgents, const std::queue<int>& other_infectedQueue) ;
 };
 
 #endif

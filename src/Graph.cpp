@@ -62,7 +62,7 @@ Tree *Graph::BFS(int nodeInd, Session &sess) const {
         for (int i = 0; i < numOfNodes; i++) {
             if (edges[tempTree->getLabel()][i] == 1 && (!visited[i])) {
                 Tree *toPush = Tree::createTree(sess, i);
-                bfsTree->addChild(toPush); //TODO:Change to vis->    + Review: changed to *Tree in brackets
+                tempTree->addChild(*toPush); //TODO:Change to vis->    + Review: changed to *Tree in brackets
                 q.push_back(toPush);
                 visited[i] = true;
             }

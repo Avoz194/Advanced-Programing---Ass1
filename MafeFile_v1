@@ -9,4 +9,6 @@ project: bin/Session.o bin/Agent.o bin/Graph.o bin/Tree.o
 		@echo 'Finished building target: project'
 		@echo ' '
 
-#
+#Depends on the source and header files
+bin/Session.o: src/Session.cpp
+		g++ -g
