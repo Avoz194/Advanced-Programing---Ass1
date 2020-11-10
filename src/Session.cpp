@@ -9,7 +9,7 @@ using namespace std;
 
 Session::Session(const std::string &path) : g(vector<vector<int>>()), cycle(0), agents(
         vector<Agent *>()), pendingAgents(
-        vector<Agent *>()), infectedQueue(queue<int>()) { //TODO: make sure if needed treeType in this line
+        vector<Agent *>()), infectedQueue(queue<int>()) {
 
     //read JSON file
     ifstream inP(path); //TODO: make sure works in MakeFile
