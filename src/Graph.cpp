@@ -48,59 +48,26 @@ void Graph::spreadVirus(int nodeInd) {
 }
 
 Tree *Graph::BFS(int nodeInd, Session &sess) const {
-    //----------------------------check-----------------------
-//    Tree &tree = *Tree::createTree(sess,nodeInd);
-//    int tC = sess.getCycle();
-//    TreeType tT = sess.getTreeType();
-//
-//
-//
-//    if(tT== Cycle){
-//
-//    }else if (tT == MaxRank){
-//
-//    }else{
-//
-//    }
-//    int numOfNodes = edges.size();
-//    std::vector<bool> visited(numOfNodes, false);
-//    std::vector<Tree *> q;
-//    q.push_back(tree);
-//
-//    int tempMaxRank;
-//    int tempMaxLabel;
-//    visited[nodeInd] = true;
-//
-//
-//
-//
-//
-//
-    //---------------------------end check -----------------------
-
-    Tree *bfsTree = Tree::createTree(sess,
-                                     nodeInd); //TODO:Review: changed bfsTree to be pointer - Make sure how deletes it later
+    Tree *bfsTree = Tree::createTree(sess,nodeInd); //TODO:Review: changed bfsTree to be pointer - Make sure how deletes it later
     int numOfNodes = edges.size();
     std::vector<bool> visited(numOfNodes, false);
-    std::vector<int> q;
-    q.push_back(nodeInd);
-
+    std::deque<Tree*> q;
+    q.push_back(bfsTree);
     visited[nodeInd] = true;
 
-    int vis;
     while (!q.empty()) {
-        vis = q[0];
-
-        q.erase(q.begin()); // delete the first element in the q
+        Tree* tempTree = q[0];
+        q.pop_front();
 
         for (int i = 0; i < numOfNodes; i++) {
-            if (edges[vis][i] == 1 && (!visited[i])) {
-                bfsTree->addChild(
-                        *Tree::createTree(sess, i)); //TODO:Change to vis->    + Review: changed to *Tree in brackets
-                q.push_back(i);
+            if (edges[tempTree->getLabel()][i] == 1 && (!visited[i])) {
+                Tree *toPush = Tree::createTree(sess, i);
+                bfsTree->addChild(toPush); //TODO:Change to vis->    + Review: changed to *Tree in brackets
+                q.push_back(toPush);
                 visited[i] = true;
             }
         }
     }
+
     return bfsTree;
 }
