@@ -26,7 +26,7 @@ void ContactTracer::act(Session &session) {
     delete t1;
 }
 
-int ContactTracer::getIndex() const { return -1; }
+const int ContactTracer::getIndex() const { return -1; }
 Agent* ContactTracer::clone() const { return new ContactTracer();}
 
 
@@ -53,7 +53,7 @@ void Virus::act(Session &session) {
     }
 }
 
-int Virus::getIndex() const { return nodeInd; }
+const int Virus::getIndex() const { return nodeInd; }
 
 Agent *Virus::clone() const {
     return new Virus(getIndex());

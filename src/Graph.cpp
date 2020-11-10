@@ -1,6 +1,7 @@
 #include <iostream>
 #include "../include/Graph.h"
 #include "../include/Tree.h"
+#include <deque>
 
 using namespace std;
 
