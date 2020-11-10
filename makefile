@@ -10,8 +10,8 @@ cTrace: bin/main.o bin/Session.o bin/Agent.o bin/Graph.o bin/Tree.o
 		@echo ' '
 
 #Depends on the source and header files
-bin/Main.o: src/Main.cpp
-		g++ -g -Wall -Weffc++ -std=c++11 -c -Iinclude -o bin/Main.o src/Main.cpp
+bin/main.o: src/main.cpp
+		g++ -g -Wall -Weffc++ -std=c++11 -c -Iinclude -o bin/main.o src/main.cpp
 
 bin/Session.o: src/Session.cpp
 		g++ -g -Wall -Weffc++ -std=c++11 -c -Iinclude -o bin/Session.o src/Session.cpp
