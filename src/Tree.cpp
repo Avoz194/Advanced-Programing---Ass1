@@ -164,6 +164,8 @@ Tree &Tree::operator=(Tree &&other) {
     }
     children = other.getChildren();
     node = other.getLabel();
+
+    other.children.empty();
     return *this;
 }
 //-------------------------------------------------end Rule of 5--------------------------------------------------
