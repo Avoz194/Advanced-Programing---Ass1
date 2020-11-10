@@ -7,14 +7,14 @@
 using json = nlohmann::json;
 using namespace std;
 
-Session::Session(const std::string &path) : g(vector<vector<int>>()), cycle(0), agents(
+Session::Session(const std::string &path) : g(vector<vector<int>>()), treeType(), cycle(0), agents(
         vector<Agent *>()), pendingAgents(
         vector<Agent *>()), infectedQueue(queue<int>()) {
 
     //read JSON file
     ifstream inP(path); //TODO: make sure works in MakeFile
     json inputFile;
-    inputFile << inP;
+    inP>>inputFile;
     //build initial graph
     setGraph(Graph(inputFile["graph"]));
     //build initial agent list
@@ -103,7 +103,7 @@ Session::isEndOfSess() const { //for every virus agent, make sure isInfected and
             //iterate through the edges of the graph to make sure neighbors are infected;
             const vector<int> &neighbors = g.getEdges()[index];
             for (int i = 0; i < neighbors.size(); i++) {
-                if (neighbors[i] == 1 & !g.isInfected(i)) {
+                if ((neighbors[i] == 1 )& !g.isInfected(i)) {
                     isSatisfied = false;
                     break;
                 }

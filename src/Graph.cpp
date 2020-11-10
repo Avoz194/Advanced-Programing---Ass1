@@ -6,11 +6,12 @@
 using namespace std;
 
 //base constructor
-Graph::Graph(std::vector<std::vector<int>> matrix) : edges(matrix), nodeStatusList(std::vector<char>(matrix.size())) {
-    for (int i = 0; i <= nodeStatusList.size() - 1; i++) {
+Graph::Graph(std::vector<std::vector<int>> matrix) : edges(matrix), nodeStatusList(std::vector<char>(edges.size())) {
+    for (int i = 0; i < nodeStatusList.size(); i++) {
         nodeStatusList[i] = 'H';
     }
 }
+
 /*
 
 Graph::Graph(const Graph &copyGraph) : edges(copyGraph.getEdges()),
@@ -22,7 +23,7 @@ const bool Graph::isInfected(int nodeInd) const {
 }
 
 const bool Graph::hasVirus(int nodeInd) const {
-    return nodeStatusList[nodeInd] == 'C' | nodeStatusList[nodeInd] == 'I';
+    return (nodeStatusList[nodeInd] == 'C') | (nodeStatusList[nodeInd] == 'I');
 }
 
 const std::vector<std::vector<int>> &Graph::getEdges() const {
@@ -49,15 +50,16 @@ void Graph::spreadVirus(int nodeInd) {
 }
 
 Tree *Graph::BFS(int nodeInd, Session &sess) const {
-    Tree *bfsTree = Tree::createTree(sess,nodeInd); //TODO:Review: changed bfsTree to be pointer - Make sure how deletes it later
+    Tree *bfsTree = Tree::createTree(sess,
+                                     nodeInd); //TODO:Review: changed bfsTree to be pointer - Make sure how deletes it later
     int numOfNodes = edges.size();
     std::vector<bool> visited(numOfNodes, false);
-    std::deque<Tree*> q;
+    std::deque<Tree *> q;
     q.push_back(bfsTree);
     visited[nodeInd] = true;
 
     while (!q.empty()) {
-        Tree* tempTree = q[0];
+        Tree *tempTree = q[0];
         q.pop_front();
 
         for (int i = 0; i < numOfNodes; i++) {

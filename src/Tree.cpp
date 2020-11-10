@@ -33,13 +33,12 @@ Tree *Tree::createTree(const Session &session, int rootLabel) {
         case Cycle: {
             return new CycleTree(rootLabel, session.getCycle());
         }
+        default:
+            return 0;
     }
 
 }
 
-int Tree::traceTree() { //TODO: what to return here ?
-    return 0;
-}
 
 //CycleTree
 CycleTree::CycleTree(int rootLabel, int currCycle) : Tree(rootLabel), currCycle(currCycle) {
@@ -69,17 +68,15 @@ MaxRankTree::MaxRankTree(int rootLabel) : Tree(rootLabel) {
 }
 
 int MaxRankTree::traceTree() { // due to code clearance and logic we decided to copy the BFS algorithm with different purpose
-    Tree *tree = this->clone();
-    int tempMaxRank;
-    int tempMaxLabel;
+  //  Tree *tree = this->clone();
 
     std::vector<bool> visited(false);
     std::deque<Tree *> q;
-    q.push_back(tree);
+    q.push_back(this);
 
-    visited[this->node] = true;
-    tempMaxLabel = q[0]->getLabel();
-    tempMaxRank = this->getChildren().size();
+    visited[node] = true;
+    int tempMaxLabel = q[0]->getLabel();
+    int tempMaxRank = this->getChildren().size();
     while (!q.empty()) {
         Tree *tempTree = q[0];
         q.pop_front();
