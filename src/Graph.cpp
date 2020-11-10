@@ -48,6 +48,36 @@ void Graph::spreadVirus(int nodeInd) {
 }
 
 Tree *Graph::BFS(int nodeInd, Session &sess) const {
+    //----------------------------check-----------------------
+//    Tree &tree = *Tree::createTree(sess,nodeInd);
+//    int tC = sess.getCycle();
+//    TreeType tT = sess.getTreeType();
+//
+//
+//
+//    if(tT== Cycle){
+//
+//    }else if (tT == MaxRank){
+//
+//    }else{
+//
+//    }
+//    int numOfNodes = edges.size();
+//    std::vector<bool> visited(numOfNodes, false);
+//    std::vector<Tree *> q;
+//    q.push_back(tree);
+//
+//    int tempMaxRank;
+//    int tempMaxLabel;
+//    visited[nodeInd] = true;
+//
+//
+//
+//
+//
+//
+    //---------------------------end check -----------------------
+
     Tree *bfsTree = Tree::createTree(sess,
                                      nodeInd); //TODO:Review: changed bfsTree to be pointer - Make sure how deletes it later
     int numOfNodes = edges.size();

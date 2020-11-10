@@ -17,6 +17,7 @@ public:
     const int &getLabel() const;  // for MRT TODO:Test to make sure activates correct function
 
     //rule of 5
+    void clear();
     virtual ~Tree(); //destructor
     Tree(const Tree &other); //copy constructor
     Tree(Tree &&other); //move constructor

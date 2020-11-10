@@ -36,7 +36,7 @@ Tree *Tree::createTree(const Session &session, int rootLabel) {
 
 }
 
-int Tree::traceTree() {
+int Tree::traceTree() { //TODO: what to return here ?
 
 }
 
@@ -144,21 +144,22 @@ const std::vector<Tree *> &RootTree::getChildren() const { //TODO: MRT,CT,RT
 */
 //--------------Rule of 5--------------
 //Destructor
-Tree::~Tree() {
+void Tree::clear(){
     for (int i = 0; i < children.size(); i++) {
         delete children[i];
         children[i] = nullptr;
     }
 }
 
-//copyConstructor
-Tree::Tree(const Tree &other) {
-
+Tree::~Tree() {
+    clear();
 }
 
-//move constructor
-Tree::Tree(Tree &&other) {
-
+//copyConstructor
+Tree::Tree(const Tree &other) :node(other.node) , children(other.children) {
+        for (Tree * tc :other.children){
+            children.push_back(tc->clone());
+        }
 }
 
 //copy assignment
@@ -166,16 +167,33 @@ Tree &Tree::operator=(const Tree &other) {
     if (this == &other) {
         return *this;
     }
-    if (children != nullptr & (node != nullptr)) {
-        delete children;
-        children = nullptr;
+    if ((!(children.empty())) & (node >0)) {
+        for (int i = 0; i < children.size(); i++) {
+            delete children[i];
+            children[i] = nullptr;
+        }
+    }
+    node = other.node;
+    children = other.children;
+    for (Tree * tT:other.children){
+        children.push_back(tT->clone());
     }
 
 }
 
+//move constructor
+Tree::Tree(Tree &&other) : node(other.node) , children(other.getChildren()) {
+    other.clear();
+}
 
 
 //move assignment
 Tree &Tree::operator=(Tree &&other) {
+    if(!(children.empty())){
+        clear();
+    }
+    children = other.getChildren();
+    node = other.getLabel();
 
+    return *this;
 }
