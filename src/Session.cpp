@@ -91,7 +91,7 @@ void Session::addAgent(const Agent &agent) {
 const bool
 Session::isEndOfSess() const { //for every virus agent, make sure isInfected and make sure all neighbors are infected as well
     bool isSatisfied(true);
-    for (int i = 0; isSatisfied & i < agents.size(); i++) {
+    for (int i = 0; isSatisfied && i < agents.size(); i++) {
         //Iterate through the agents list
         if (agents[i] == dynamic_cast<Virus *>(agents[i])) {//TODO:figure out how to know whether virus or not
             int index = agents[i]->getIndex();
@@ -211,12 +211,13 @@ Session& Session::operator=(Session &&other) {
         infectedQueue=other.infectedQueue;
 
         //change to null
-        other.g= nullptr;
-        other.treeType = nullptr;
+        //other.g= nullptr;
+       // other.treeType = nullptr;
+        //other.infectedQueue = queue<int>();;
+
         other.cycle = 0;
-        other.agents=nullptr;
-        other.pendingAgents=nullptr;
-        other.infectedQueue = nullptr;
+        other.agents=vector<Agent*>(0);;
+        other.pendingAgents=vector<Agent*>(0);
     }
     return *this;
 }
