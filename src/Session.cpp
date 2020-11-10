@@ -8,7 +8,7 @@ using json = nlohmann::json;
 using namespace std;
 
 Session::Session(const std::string &path) : g(vector<vector<int>>()), cycle(0), pendingAgents(
-        vector<Agent *>(), infectedQueue(queue<int>()) { //TODO: make sure if needed treeType in this line
+        vector<Agent *>()), infectedQueue(queue<int>()) { //TODO: make sure if needed treeType in this line
 
     //read JSON file
     ifstream inP(path); //TODO: make sure works in MakeFile
@@ -154,15 +154,27 @@ Session::~Session() {
 
 //copy constructor
 
-Session::Session(const Session &other) : g(other.g), treeType(other.treeType), cycle(other.cycle),
-                                         infectedQueue(other.infectedQueue), agents(vector<Agent *>(other.agents.size())),
-                                         pendingAgents(vector<Agent *>(other.pendingAgents.size())) {
-    for (Agent * ag:other.agents){
+void Session::copy(const Graph &other_g, const TreeType &other_treeType, const int &other_cycle,
+                   const vector<Agent *> &other_agents, const vector<Agent *> &other_pendingAgents,
+                   const queue<int> &other_infectedQueue)  {
+    g = other_g; //Todo - make sure it's not a pointer but assignment operator
+    treeType = other_treeType;
+    cycle = other_cycle;
+    infectedQueue = other_infectedQueue;
+    agents = vector<Agent *>(other_agents.size());
+    pendingAgents = vector<Agent *>(other_pendingAgents.size());
+
+    for (Agent *ag:other_agents) {
         agents.push_back(ag->clone());
     }
-    for (Agent * ag:other.pendingAgents){
+    for (Agent *ag:other_pendingAgents) {
         pendingAgents.push_back(ag->clone());
     }
+}
+
+
+Session::Session(const Session &other): g(vector<vector<int>>()){
+    copy(other.g,other.treeType,other.cycle, other.agents, other.pendingAgents, other.infectedQueue);
 }
 
 //copy assignment
@@ -172,18 +184,7 @@ Session &Session::operator=(const Session &other) {
     }
     //Todo:add safety
     clear();
-    g = other.g; //Todo - make sure it's not a pointer but assignment operator
-    treeType = other.treeType;
-    cycle = other.cycle;
-    infectedQueue = other.infectedQueue;
-    agents =vector<Agent *>(other.agents.size());
-    pendingAgents =vector<Agent *>(other.pendingAgents.size());
-    for (Agent * ag:other.agents){
-        agents.push_back(ag->clone());
-    }
-    for (Agent * ag:other.pendingAgents){
-        pendingAgents.push_back(ag->clone());
-    }
+    copy(other.g,other.treeType,other.cycle, other.agents, other.pendingAgents, other.infectedQueue);
     return *this;
 }
 
@@ -192,6 +193,8 @@ Session::Session(Session &&other) {}
 
 //move assignment
 Session::Session &operator=(Session &&other) {}
+
+
 
 
 
