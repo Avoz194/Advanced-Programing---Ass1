@@ -92,8 +92,7 @@ int MaxRankTree::traceTree() { // commit BFS travel over the tree (due to code c
                 tempMaxRank = tempTree->getChildren()[i]->getChildren().size();
 
             }
-            tempTree = tempTree->getChildren()[i];
-            q.push_back(tempTree);
+            q.push_back(tempTree->getChildren()[i]);
         }
     }
     return tempMaxLabel;
