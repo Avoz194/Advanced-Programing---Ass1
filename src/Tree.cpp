@@ -11,6 +11,10 @@ Tree::Tree(int rootLabel) : node(rootLabel), children(vector<Tree *>()) {
 void Tree::addChild(const Tree &child) {
     children.push_back(child.clone());
 }
+//for efficiency reasons as instructed in the office hours
+void Tree::addChild(Tree* child){
+    children.push_back(child->clone());
+}
 
 const std::vector<Tree *> &
 Tree::getChildren() const { //TODO: MRT,CT,RT - Test to make sure activates correct function (maybe add Tree::)

@@ -9,6 +9,7 @@ class Tree{
 public:
     Tree(int rootLabel);
     void addChild(const Tree& child);
+    void addChild(Tree* child);
     static Tree* createTree(const Session& session, int rootLabel);
 
     virtual int traceTree()=0;
