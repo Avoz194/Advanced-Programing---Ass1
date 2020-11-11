@@ -135,7 +135,7 @@ Tree::Tree(const Tree &other) : node(other.node), children(other.children) {
 
 //copy assignment
 Tree &Tree::operator=(Tree& other) {
-    if (this == &other) {  // how to change this one //TODO: ? i donnnnnnt knowwwww
+    if (this == &other) {  // how to change this one
         return *this;
     }
     other.clear();

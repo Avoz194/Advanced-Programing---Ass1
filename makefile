@@ -28,4 +28,4 @@ bin/Tree.o: src/Tree.cpp
 #Clean the build directory
 clean:
 		@echo 'Cleaning'
-		rm-f bin/*
+		rm -f bin/*
