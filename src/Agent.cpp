@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Agent::Agent() = default;
+Agent::Agent() {};
 
 void Agent::act(Session &session) {
 }
