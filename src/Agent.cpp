@@ -57,3 +57,8 @@ const int Virus::getIndex() const { return nodeInd; }
 Agent *Virus::clone() const {
     return new Virus(getIndex());
 }
+
+//empty destructor
+Agent::~Agent() {
+
+}
