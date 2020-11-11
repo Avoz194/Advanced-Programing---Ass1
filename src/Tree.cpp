@@ -115,7 +115,7 @@ Tree *RootTree::clone() const {
 void Tree::clear() {
     for (int i = 0;( i < children.size() )& !(children.empty()); i++) {
         if(children[i]!= nullptr){
-            children[i]->clear();
+            delete children[i];
             children[i] = nullptr;
         }
     }
@@ -147,7 +147,7 @@ Tree &Tree::operator=(Tree& other) {
 }
 
 //move constructor
-Tree::Tree(Tree&& other) : node(other.node), children(other.getChildren()) {
+Tree::Tree(Tree&& other) : node(other.node), children(move(other.getChildren())) {
     other.clear();
 }
 //move assignment
@@ -155,8 +155,9 @@ Tree &Tree::operator=(Tree&& other) {
     if (!(children.empty())) {
         clear();
     }
-    children = other.getChildren();
+    children = move(other.getChildren());
     node = other.getLabel();
+
     other.children.clear();
     return *this;
 }

@@ -64,7 +64,7 @@ Tree *Graph::BFS(int nodeInd, Session &sess) const {
 
         for (int i = 0; i < numOfNodes; i++) {
             if (edges[tempTree->getLabel()][i] == 1 && (!visited[i])) {
-                Tree *toPush = Tree::createTree(sess, i);
+                Tree *toPush(Tree::createTree(sess, i));
                 tempTree->addChild(toPush);
                 q.push_back(toPush);  //TODO: check data leaking
                 visited[i] = true;
