@@ -51,7 +51,7 @@ void Graph::spreadVirus(int nodeInd) {
 
 Tree *Graph::BFS(int nodeInd, Session &sess) const {
     Tree *bfsTree = Tree::createTree(sess,
-                                     nodeInd); //TODO:Review: changed bfsTree to be pointer - Make sure how deletes it later
+                                     nodeInd);
     int numOfNodes = edges.size();
     std::vector<bool> visited(numOfNodes, false);
     std::deque<Tree *> q;

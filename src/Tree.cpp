@@ -13,7 +13,7 @@ void Tree::addChild(const Tree &child) {
 }
 //for efficiency reasons as instructed in the office hours
 void Tree::addChild(Tree* child){
-    children.push_back(child->clone());
+    children.push_back(child);
 }
 
 const std::vector<Tree *> &
@@ -86,14 +86,14 @@ int MaxRankTree::traceTree() { // commit BFS travel over the tree (due to code c
         Tree *tempTree = q[0];
         q.pop_front();
         for (int i = 0; i < tempTree->getChildren().size(); i++) { //loop on tempTree children
-            if ((tempTree->getChildren()[i]->getChildren().size() > tempMaxRank) &&
-                (tempTree->getChildren()[i]->getLabel()) )
+            if ((tempTree->getChildren()[i]->getChildren().size() > tempMaxRank))
             {
                 tempMaxLabel = tempTree->getChildren()[i]->getLabel();
                 tempMaxRank = tempTree->getChildren()[i]->getChildren().size();
-                tempTree = tempTree->getChildren()[i];
-                q.push_back(tempTree);
+
             }
+            tempTree = tempTree->getChildren()[i];
+            q.push_back(tempTree);
         }
     }
     return tempMaxLabel;

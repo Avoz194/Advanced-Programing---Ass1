@@ -127,7 +127,7 @@ void Session::createOutput() {
     }
     output["infected"] = infectedList;
     output["graph"] = g.getEdges();
-    ofstream outFile("../output.json"); //TODO:: change to . instead of .. before upload
+    ofstream outFile("./output.json"); //TODO:: change to . instead of .. before upload
     outFile<< output;
 }
 
