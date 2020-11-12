@@ -51,7 +51,7 @@ private:
     int cycle;
 
     std::vector<Agent *> agents;
-    std::vector<Agent *> pendingAgents;
+    std::vector<Agent *> pendingAgents;  //store agent added during cycle, will be added to 'agents' by end of cycle
     std::queue<int> infectedQueue;
 
     void clear();

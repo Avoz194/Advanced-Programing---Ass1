@@ -15,6 +15,7 @@ Session::Session(const string &path) : g(vector<vector<int>>()), treeType(), cyc
     ifstream inP(path); //TODO: make sure works in MakeFile
     json inputFile;
     inP >> inputFile;
+
     //build initial graph
     setGraph(Graph(inputFile["graph"]));
     //build initial agent list
@@ -25,15 +26,12 @@ Session::Session(const string &path) : g(vector<vector<int>>()), treeType(), cyc
             agents.push_back(new Virus(elem[1]));
             g.spreadVirus(elem[1]);
         }
-
     }
-
     // initial treeType
     if (inputFile["tree"] == "C") treeType = Cycle;
     if (inputFile["tree"] == "M") treeType = MaxRank;
     if (inputFile["tree"] == "R") treeType = Root;
 }
-
 
 void Session::simulate() {
     bool isFinished(false);
@@ -43,17 +41,18 @@ void Session::simulate() {
         for (Agent *ag:agents) {
             ag->act(*this);
         }
-        int size = pendingAgents.size(); //due to warning
+        //following the action of all current agents, add pendingAgents to the main agents list.
+        int size = pendingAgents.size();
         for (int i = 0; i <
-                        size; i++) { //following the action of all current agents, add pendingAgents to the list.
+                        size; i++) {
             agents.push_back(pendingAgents[i]->clone());
-            if (pendingAgents[i] != nullptr) {
+            if (pendingAgents[i] != nullptr) { //make sure to delete extra memory
                 delete pendingAgents[i];
                 pendingAgents[i] = nullptr;
             }
         }
-        if (isEndOfSess()) isFinished = (true);
         (cycle)++;
+        if (isEndOfSess()) isFinished = (true); //at the end of each cycle, check EndOfSess flow
     }
     cycle = 0;
     createOutput();
@@ -119,15 +118,17 @@ Session::isEndOfSess() const { //for every virus agent, make sure isInfected and
 }
 void Session::createOutput() {
     json output;
-    const vector<char> &infectedBool = g.getNodeStatusList();
+    //go through all nodes and add them if infected
     vector<int> infectedList;
-    int size = infectedBool.size();
+    const vector<vector<int>>& edges = g.getEdges();
+    int size = edges.size();
     for (int i = 0; i < size; i++) {
-        if (infectedBool[i] == 'I') infectedList.push_back(i);
+        if (g.isInfected(i)) infectedList.push_back(i);
     }
+    //add to file
     output["infected"] = infectedList;
-    output["graph"] = g.getEdges();
-    ofstream outFile("./output.json"); //TODO:: change to . instead of .. before upload
+    output["graph"] = edges;
+    ofstream outFile("./output.json");
     outFile << output;
 }
 
