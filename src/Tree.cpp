@@ -128,7 +128,7 @@ Tree::~Tree() {
     clear();
 }
 //copyConstructor
-void Tree::copy(const vector<Tree *> &other_children , const int &other_node) {
+void Tree::copy(const vector<Tree *> &other_children , const int &other_node)  {
     children = other_children;
     node = other_node;
     int size = other_children.size();
@@ -142,21 +142,23 @@ Tree::Tree(const Tree &other) : node(other.node), children(other.children) {
 }
 
 //copy assignment
-Tree &Tree::operator=(Tree& other) {
-    if (this == &other) {  // how to change this one
+Tree &Tree::operator=(const Tree& other) {
+    if (this == &other) {
         return *this;
     }
-    other.clear();
+    clear();
+    children = other.children;
+    node = other.node;
     copy(other.children, other.node);
     return *this;
 }
 
 //move constructor
-Tree::Tree(Tree&& other) : node(other.node), children(move(other.getChildren())) {
+Tree::Tree(Tree &&other) : node(other.node), children(move(other.getChildren())) {
     other.clear();
 }
 //move assignment
-Tree &Tree::operator=(Tree&& other) {
+Tree &Tree::operator=(Tree &&other) {
     if (!(children.empty())) {
         clear();
     }

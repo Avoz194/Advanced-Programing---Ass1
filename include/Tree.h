@@ -23,7 +23,7 @@ public:
     virtual ~Tree(); //destructor
     Tree(const Tree &other); //copy constructor
     Tree(Tree &&other); //move constructor
-    Tree& operator=(Tree &other); //copy assignment
+    Tree& operator=(const Tree &other); //copy assignment
     Tree& operator=(Tree &&other); //move assignment
 
 protected:
