@@ -14,7 +14,7 @@ Session::Session(const std::string &path) : g(vector<vector<int>>()), treeType()
     //read JSON file
     ifstream inP(path); //TODO: make sure works in MakeFile
     json inputFile;
-    inP>>inputFile;
+    inP >> inputFile;
     //build initial graph
     setGraph(Graph(inputFile["graph"]));
     //build initial agent list
@@ -71,14 +71,13 @@ Graph &Session::getGraph() {
 }
 
 int Session::dequeueInfected() { //TODO: Check with aviv about this one
-    if(!infectedQueue.empty()){
+    if (!infectedQueue.empty()) {
         int toPop = infectedQueue.front();
         infectedQueue.pop();
         return toPop;
     }
     return -1;
 }
-
 
 
 void Session::enqueueInfected(int nodeInd) {
@@ -107,7 +106,7 @@ Session::isEndOfSess() const { //for every virus agent, make sure isInfected and
             //iterate through the edges of the graph to make sure neighbors are infected;
             const vector<int> &neighbors = g.getEdges()[index];
             for (int i = 0; i < neighbors.size(); i++) {
-                if ((neighbors[i] == 1 )& !g.isInfected(i)) {
+                if ((neighbors[i] == 1) & !g.isInfected(i)) {
                     isSatisfied = false;
                     break;
                 }
@@ -128,7 +127,7 @@ void Session::createOutput() {
     output["infected"] = infectedList;
     output["graph"] = g.getEdges();
     ofstream outFile("./output.json"); //TODO:: change to . instead of .. before upload
-    outFile<< output;
+    outFile << output;
 }
 
 //rule of 5
@@ -159,16 +158,7 @@ Session::~Session() {
 
 //copy constructor
 
-void Session::copy(const Graph &other_g, const TreeType &other_treeType, const int &other_cycle,
-                   const vector<Agent *> &other_agents, const vector<Agent *> &other_pendingAgents,
-                   const queue<int> &other_infectedQueue) { //Didn't pass session object to avoid unnecessary getters creation
-    g = other_g; //Todo - make sure it's not a pointer but assignment operator
-    treeType = other_treeType;
-    cycle = other_cycle;
-    infectedQueue = other_infectedQueue;
-    agents = vector<Agent *>(other_agents.size());
-    pendingAgents = vector<Agent *>(other_pendingAgents.size());
-
+void Session::copy(const vector<Agent *> &other_agents, const vector<Agent *> &other_pendingAgents) {
     for (Agent *ag:other_agents) {
         agents.push_back(ag->clone());
     }
@@ -178,8 +168,11 @@ void Session::copy(const Graph &other_g, const TreeType &other_treeType, const i
 }
 
 
-Session::Session(const Session &other) : g(vector<vector<int>>()) {
-    copy(other.g, other.treeType, other.cycle, other.agents, other.pendingAgents, other.infectedQueue);
+Session::Session(const Session &other) : g(other.g), treeType(other.treeType), cycle(other.cycle),
+                                         agents(vector<Agent *>(other.agents.size())),
+                                         pendingAgents(vector<Agent *>(other.pendingAgents.size())),
+                                         infectedQueue(other.infectedQueue) {
+    copy(other.agents, other.pendingAgents);
 }
 
 //copy assignment
@@ -189,7 +182,14 @@ Session &Session::operator=(const Session &other) {
     }
     //Todo:add safety
     clear();
-    copy(other.g, other.treeType, other.cycle, other.agents, other.pendingAgents, other.infectedQueue);
+    g = other.g;
+    treeType = other.treeType;
+    cycle = other.cycle;
+    agents = vector<Agent *>(other.agents.size());
+    pendingAgents = vector<Agent *>(other.pendingAgents.size());
+    infectedQueue = other.infectedQueue;
+    copy(other.agents, other.pendingAgents);
+
     return *this;
 }
 
@@ -206,7 +206,7 @@ Session &Session::operator=(Session &&other) {
     if (this != &other) {
         clear();
         //Steal pointers
-        g= std::move(other.g);
+        g = std::move(other.g);
         treeType = other.treeType;
         cycle = other.cycle;
         agents = std::move(other.agents);
