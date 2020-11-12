@@ -133,6 +133,7 @@ void Tree::copy(const vector<Tree *> &other_children , const int &other_node) {
     node = other_node;
     int size = other_children.size();
     for (int i = 0; (i < size) & !(other_children.empty()); i++) {
+        if(other_children[i])
             children.push_back(other_children[i]->clone());
     }
 }
