@@ -43,8 +43,9 @@ void Session::simulate() {
         for (Agent *ag:agents) {
             ag->act(*this);
         }
+        int size =pendingAgents.size(); //due to warning
         for (int i = 0; i <
-                        pendingAgents.size(); i++) { //following the action of all current agents, add pendingAgents to the list.
+                        size; i++) { //following the action of all current agents, add pendingAgents to the list.
             agents.push_back(pendingAgents[i]->clone());   //TODO:Possible data leak - make sure
             if (pendingAgents[i] != nullptr) {
                 delete pendingAgents[i];
@@ -71,13 +72,14 @@ Graph &Session::getGraph() {
 }
 
 int Session::dequeueInfected() { //TODO: Check with aviv about this one
-    if (!infectedQueue.empty()) {
+    if(!infectedQueue.empty()){
         int toPop = infectedQueue.front();
         infectedQueue.pop();
         return toPop;
     }
     return -1;
 }
+
 
 
 void Session::enqueueInfected(int nodeInd) {
@@ -95,7 +97,8 @@ void Session::addAgent(const Agent &agent) {
 const bool
 Session::isEndOfSess() const { //for every virus agent, make sure isInfected and make sure all neighbors are infected as well
     bool isSatisfied(true);
-    for (int i = 0; isSatisfied && i < agents.size(); i++) {
+    int size = agents.size();
+    for (int i = 0; isSatisfied && i < size; i++) {
         //Iterate through the agents list
         if (agents[i] == dynamic_cast<Virus *>(agents[i])) {//TODO:figure out how to know whether virus or not
             int index = agents[i]->getIndex();
@@ -105,7 +108,8 @@ Session::isEndOfSess() const { //for every virus agent, make sure isInfected and
             }
             //iterate through the edges of the graph to make sure neighbors are infected;
             const vector<int> &neighbors = g.getEdges()[index];
-            for (int i = 0; i < neighbors.size(); i++) {
+            int sizeNe = neighbors.size();
+            for (int i = 0; i < sizeNe; i++) {
                 if ((neighbors[i] == 1) & !g.isInfected(i)) {
                     isSatisfied = false;
                     break;
@@ -121,7 +125,8 @@ void Session::createOutput() {
     json output;
     const vector<char> &infectedBool = g.getNodeStatusList();
     vector<int> infectedList;
-    for (int i = 0; i < infectedBool.size(); i++) {
+    int size = infectedBool.size();
+    for (int i = 0; i < size; i++) {
         if (infectedBool[i] == 'I') infectedList.push_back(i);
     }
     output["infected"] = infectedList;
@@ -137,14 +142,16 @@ void Session::createOutput() {
 //destructor
 void Session::clear() {
     //delete all agents on agents
-    for (int i = 0; i < agents.size(); i++) {
+    int size1 = agents.size();
+    for (int i = 0; i < size1; i++) {
         if (agents[i] != nullptr) {
             delete agents[i];
             agents[i] = nullptr;
         }
     }
     //delete all agents on pendingAgents - should be empty at that point already
-    for (int i = 0; i < pendingAgents.size(); i++) {
+    int size2 = pendingAgents.size();
+    for (int i = 0; i < size2; i++) {
         if (pendingAgents[i] != nullptr) {
             delete pendingAgents[i];
             pendingAgents[i] = nullptr;
@@ -206,7 +213,7 @@ Session &Session::operator=(Session &&other) {
     if (this != &other) {
         clear();
         //Steal pointers
-        g = std::move(other.g);
+        g= std::move(other.g);
         treeType = other.treeType;
         cycle = other.cycle;
         agents = std::move(other.agents);

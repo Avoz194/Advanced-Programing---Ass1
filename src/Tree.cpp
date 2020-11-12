@@ -85,11 +85,13 @@ int MaxRankTree::traceTree() { // commit BFS travel over the tree (due to code c
     while (!q.empty()) {
         Tree *tempTree = q[0];
         q.pop_front();
-        for (int i = 0; i < tempTree->getChildren().size(); i++) { //loop on tempTree children
-            if ((tempTree->getChildren()[i]->getChildren().size() > tempMaxRank))
+        int size1 = tempTree->getChildren().size();
+        for (int i = 0; i < size1; i++) { //loop on tempTree children
+            int size2 =tempTree->getChildren()[i]->getChildren().size();
+            if (size2 > tempMaxRank)
             {
                 tempMaxLabel = tempTree->getChildren()[i]->getLabel();
-                tempMaxRank = tempTree->getChildren()[i]->getChildren().size();
+                tempMaxRank = size2;
 
             }
             q.push_back(tempTree->getChildren()[i]);
@@ -113,7 +115,8 @@ Tree *RootTree::clone() const {
 //-----------------------------------------------------Rule of 5--------------------------------------------------
 //Destructor
 void Tree::clear() {
-    for (int i = 0;( i < children.size() )& !(children.empty()); i++) {
+    int size = children.size();
+    for (int i = 0;( i < size )& !(children.empty()); i++) {
         if(children[i]!= nullptr){
             delete children[i];
             children[i] = nullptr;
@@ -128,7 +131,8 @@ Tree::~Tree() {
 void Tree::copy(const vector<Tree *> &other_children , const int &other_node) {
     children = other_children;
     node = other_node;
-    for (int i = 0; (i < other_children.size()) & !(other_children.empty()); i++) {
+    int size = other_children.size();
+    for (int i = 0; (i < size) & !(other_children.empty()); i++) {
             children.push_back(other_children[i]->clone());
     }
 }
