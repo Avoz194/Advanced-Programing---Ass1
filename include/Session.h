@@ -28,9 +28,9 @@ public:
 
     int dequeueInfected();
 
-    //Getters:
     TreeType getTreeType() const;
-    Graph & getGraph();
+
+    Graph &getGraph();
     const int getCycle() const;
 
     void createOutput();
@@ -51,12 +51,11 @@ private:
     int cycle;
 
     std::vector<Agent *> agents;
-    std::vector<Agent *> pendingAgents;  //store agent added during cycle, will be added to 'agents' by end of cycle
+    std::vector<Agent *> pendingAgents;
     std::queue<int> infectedQueue;
 
     void clear();
-
-    void copy(const std::vector<Agent *> &other_agents, const std::vector<Agent *> &other_pendingAgents);
+    std::vector<Agent*> * copy() const;
 };
 
 #endif

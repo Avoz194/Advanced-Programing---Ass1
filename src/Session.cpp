@@ -7,15 +7,13 @@
 using json = nlohmann::json;
 using namespace std;
 
-Session::Session(const string &path) : g(vector<vector<int>>()), treeType(), cycle(0), agents(
-        vector<Agent *>()), pendingAgents(
-        vector<Agent *>()), infectedQueue(queue<int>()) {
+Session::Session(const std::string &path) : g(vector<vector<int>>()), cycle(0), pendingAgents(
+        vector<Agent *>()) { //TODO: make sure if needed treeType in this line
 
     //read JSON file
     ifstream inP(path); //TODO: make sure works in MakeFile
     json inputFile;
-    inP >> inputFile;
-
+    inputFile << inP;
     //build initial graph
     setGraph(Graph(inputFile["graph"]));
     //build initial agent list
@@ -26,12 +24,15 @@ Session::Session(const string &path) : g(vector<vector<int>>()), treeType(), cyc
             agents.push_back(new Virus(elem[1]));
             g.spreadVirus(elem[1]);
         }
+
     }
+
     // initial treeType
     if (inputFile["tree"] == "C") treeType = Cycle;
     if (inputFile["tree"] == "M") treeType = MaxRank;
     if (inputFile["tree"] == "R") treeType = Root;
 }
+
 
 void Session::simulate() {
     bool isFinished(false);
@@ -41,18 +42,16 @@ void Session::simulate() {
         for (Agent *ag:agents) {
             ag->act(*this);
         }
-        //following the action of all current agents, add pendingAgents to the main agents list.
-        int size = pendingAgents.size();
         for (int i = 0; i <
-                        size; i++) {
-            agents.push_back(pendingAgents[i]->clone());
-            if (pendingAgents[i] != nullptr) { //make sure to delete extra memory
+                        pendingAgents.size(); i++) { //following the action of all current agents, add pendingAgents to the list.
+            agents.push_back(pendingAgents[i]->clone());   //TODO:Possible data leak - make sure
+            if (pendingAgents[i] != nullptr) {
                 delete pendingAgents[i];
                 pendingAgents[i] = nullptr;
             }
         }
+        if (isEndOfSess()) isFinished = (true);
         (cycle)++;
-        if (isEndOfSess()) isFinished = (true); //at the end of each cycle, check EndOfSess flow
     }
     cycle = 0;
     createOutput();
@@ -70,13 +69,10 @@ Graph &Session::getGraph() {
     return g;
 }
 
-int Session::dequeueInfected() {
-    if (!infectedQueue.empty()) {
-        int toPop = infectedQueue.front();
-        infectedQueue.pop();
-        return toPop;
-    }
-    return -1;
+int Session::dequeueInfected() { //TODO: Check with aviv about this one
+    int toPop = infectedQueue.front();
+    infectedQueue.pop();
+    return toPop;
 }
 
 
@@ -95,58 +91,56 @@ void Session::addAgent(const Agent &agent) {
 const bool
 Session::isEndOfSess() const { //for every virus agent, make sure isInfected and make sure all neighbors are infected as well
     bool isSatisfied(true);
-    int size = g.getNodeStatusList().size();
-    for (int i = 0; isSatisfied && i < size; i++) {
-        if (g.hasVirus(i)) {
-            if (!g.isInfected(i)) {     //in case a node is a carrier - session didn't finish.
+    for (int i = 0; isSatisfied & i < agents.size(); i++) {
+        //Iterate through the agents list
+        if (agents[i] == dynamic_cast<Virus *>(agents[i])) {//TODO:figure out how to know whether virus or not
+            int index = agents[i]->getIndex();
+            if (g.isInfected(index)) { //if agent is virus and not infected return false;
                 isSatisfied = false;
                 break;
             }
-            else { //iterate through the neighbors to make sure are infected;
-                const vector<int> &neighbors = g.getEdges()[i];
-                int sizeNe = neighbors.size();
-                for (int i = 0; i < sizeNe; i++) {
-                    if ((neighbors[i] == 1) && !g.isInfected(i)) {
-                        isSatisfied = false;
-                        break;
-                    }
+            //iterate through the edges of the graph to make sure neighbors are infected;
+            const vector<int> &neighbors = g.getEdges()[index];
+            for (int i = 0; i < neighbors.size(); i++) {
+                if (neighbors[i] == 1 & !g.isInfected(i)) {
+                    isSatisfied = false;
+                    break;
                 }
             }
         }
     }
     return isSatisfied;
+
 }
+
 void Session::createOutput() {
     json output;
-    //go through all nodes and add them if infected
+    const vector<char> &infectedBool = g.getNodeStatusList();
     vector<int> infectedList;
-    const vector<vector<int>>& edges = g.getEdges();
-    int size = edges.size();
-    for (int i = 0; i < size; i++) {
-        if (g.isInfected(i)) infectedList.push_back(i);
+    for (int i = 0; i < infectedBool.size(); i++) {
+        if (infectedBool[i] == 'I') infectedList.push_back(i);
     }
-    //add to file
-    output["infected"] = infectedList;
-    output["graph"] = edges;
+    output["infected_Nodes"] = infectedList; //TODO: need to handle dequeue for full queue or use the g.isInfectedList
+    output["graph"] = g.getEdges();
     ofstream outFile("./output.json");
     outFile << output;
 }
 
 //rule of 5
 
+
+
 //destructor
 void Session::clear() {
     //delete all agents on agents
-    int size1 = agents.size();
-    for (int i = 0; i < size1; i++) {
+    for (int i = 0; i < agents.size(); i++) {
         if (agents[i] != nullptr) {
             delete agents[i];
             agents[i] = nullptr;
         }
     }
     //delete all agents on pendingAgents - should be empty at that point already
-    int size2 = pendingAgents.size();
-    for (int i = 0; i < size2; i++) {
+    for (int i = 0; i < pendingAgents.size(); i++) {
         if (pendingAgents[i] != nullptr) {
             delete pendingAgents[i];
             pendingAgents[i] = nullptr;
@@ -156,27 +150,19 @@ void Session::clear() {
 
 Session::~Session() {
     clear();
-}
+};
 
 //copy constructor
 
-void Session::copy(const vector<Agent *> &other_agents, const vector<Agent *> &other_pendingAgents) {
-    for (Agent *ag:other_agents) {
-        if (ag)
-            agents.push_back(ag->clone());
-    }
-    for (Agent *ag:other_pendingAgents) {
-        if (ag)
-            pendingAgents.push_back(ag->clone());
-    }
-}
-
-
 Session::Session(const Session &other) : g(other.g), treeType(other.treeType), cycle(other.cycle),
-                                         agents(vector<Agent *>(other.agents.size())),
-                                         pendingAgents(vector<Agent *>(other.pendingAgents.size())),
-                                         infectedQueue(other.infectedQueue) {
-    copy(other.agents, other.pendingAgents);
+                                         infectedQueue(other.infectedQueue), agents(vector<Agent *>(other.agents.size())),
+                                         pendingAgents(vector<Agent *>(other.pendingAgents.size())) {
+    for (Agent * ag:other.agents){
+        agents.push_back(ag->clone());
+    }
+    for (Agent * ag:other.pendingAgents){
+        pendingAgents.push_back(ag->clone());
+    }
 }
 
 //copy assignment
@@ -186,44 +172,26 @@ Session &Session::operator=(const Session &other) {
     }
     //Todo:add safety
     clear();
-    g = other.g;
+    g = other.g; //Todo - make sure it's not a pointer but assignment operator
     treeType = other.treeType;
     cycle = other.cycle;
-    agents = vector<Agent *>(other.agents.size());
-    pendingAgents = vector<Agent *>(other.pendingAgents.size());
     infectedQueue = other.infectedQueue;
-    copy(other.agents, other.pendingAgents);
-
-    return *this;
-}
-
-//move constructor
-Session::Session(Session &&other) : g(move(other.g)), treeType(other.treeType), cycle(other.cycle),
-                                    agents(move(other.agents)), pendingAgents(move(other.pendingAgents)),
-                                    infectedQueue(move(other.infectedQueue)) {
-    other.agents.clear();
-    other.pendingAgents.clear();
-}
-
-//move assignment
-Session &Session::operator=(Session &&other) {
-    if (this != &other) {
-        clear();
-        //Steal pointers
-        g = move(other.g);
-        treeType = other.treeType;
-        cycle = other.cycle;
-        agents = move(other.agents);
-        pendingAgents = move(other.pendingAgents);
-        infectedQueue = move(other.infectedQueue);
-
-        other.agents.clear();
-        other.pendingAgents.clear();
+    agents =vector<Agent *>(other.agents.size());
+    pendingAgents =vector<Agent *>(other.pendingAgents.size());
+    for (Agent * ag:other.agents){
+        agents.push_back(ag->clone());
+    }
+    for (Agent * ag:other.pendingAgents){
+        pendingAgents.push_back(ag->clone());
     }
     return *this;
 }
 
+//move constructor
+Session::Session(Session &&other) {}
 
+//move assignment
+Session::Session &operator=(Session &&other) {}
 
 
 
