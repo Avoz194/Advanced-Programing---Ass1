@@ -13,12 +13,12 @@ ContactTracer::ContactTracer() : Agent() {
 
 void ContactTracer::act(Session &session) {
     Graph &g1 = session.getGraph();
-    int num = session.dequeueInfected();
+    int num = session.dequeueInfected(); // pop the next infected on the line
     if (num != -1) {
-        Tree *t1 = g1.BFS(num, session);
-        int toIsolate = t1->traceTree();
+        Tree *t1 = g1.BFS(num, session); // makes bfs tree out of the graph
+        int toIsolate = t1->traceTree(); // using the traceTree method in order to choose which node to isolate
         g1.isolateNode(toIsolate);
-        delete t1;
+        delete t1;  // deleting the remains of the bfs tree
     }
 }
 
