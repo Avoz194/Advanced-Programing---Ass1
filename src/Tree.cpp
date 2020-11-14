@@ -1,4 +1,3 @@
-#include <iostream>
 #include "../include/Tree.h"
 #include "../include/Session.h"
 

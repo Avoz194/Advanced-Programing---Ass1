@@ -1,4 +1,3 @@
-#include <iostream>
 #include <fstream>
 #include "../include/json.hpp"
 #include "../include/Session.h"
@@ -136,7 +135,7 @@ void Session::createOutput() {
 
 //destructor
 void Session::clear() {
-    //delete all agents on agents
+    //delete all agents on 'agents'
     int size1 = agents.size();
     for (int i = 0; i < size1; i++) {
         if (agents[i] != nullptr) {
@@ -144,10 +143,10 @@ void Session::clear() {
             agents[i] = nullptr;
         }
     }
-    //delete all agents on pendingAgents - should be empty at that point already
+    //delete all agents on 'pendingAgents' - should be empty at that point already
     int size2 = pendingAgents.size();
     for (int i = 0; i < size2; i++) {
-        if (pendingAgents[i] != nullptr) {
+        if (pendingAgents[i]) {
             delete pendingAgents[i];
             pendingAgents[i] = nullptr;
         }
@@ -163,7 +162,7 @@ Session::~Session() {
 void Session::copy(const vector<Agent *> &other_agents, const vector<Agent *> &other_pendingAgents) {
     for (Agent *ag:other_agents) {
         if (ag)
-            agents.push_back(ag->clone());
+            agents.push_back(ag->clone()); //didn't use addAgent as in our flow it adds to pendingAgents.
     }
     for (Agent *ag:other_pendingAgents) {
         if (ag)
@@ -172,11 +171,12 @@ void Session::copy(const vector<Agent *> &other_agents, const vector<Agent *> &o
 }
 
 
+
 Session::Session(const Session &other) : g(other.g), treeType(other.treeType), cycle(other.cycle),
                                          agents(vector<Agent *>(other.agents.size())),
                                          pendingAgents(vector<Agent *>(other.pendingAgents.size())),
                                          infectedQueue(other.infectedQueue) {
-    copy(other.agents, other.pendingAgents);
+    copy(other.agents, other.pendingAgents); //deep copy for agent lists
 }
 
 //copy assignment
@@ -192,7 +192,7 @@ Session &Session::operator=(const Session &other) {
     agents = vector<Agent *>(other.agents.size());
     pendingAgents = vector<Agent *>(other.pendingAgents.size());
     infectedQueue = other.infectedQueue;
-    copy(other.agents, other.pendingAgents);
+    copy(other.agents, other.pendingAgents); //deep copy for agent lists
 
     return *this;
 }

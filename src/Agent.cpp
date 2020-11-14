@@ -1,12 +1,11 @@
-#include <iostream>
 #include "../include/Agent.h"
-//TODO: check about this
 
 using namespace std;
 
 Agent::Agent() {};
 
-void Agent::act(Session &session) {
+//empty destructor
+Agent::~Agent() {
 }
 
 ContactTracer::ContactTracer() : Agent() {
@@ -38,15 +37,17 @@ void Virus::act(Session &session) {
         session.enqueueInfected(getIndex());
     }
     const vector<int> &neighbors(
-            g1.getEdges()[getIndex()]); //go over neighbors to look for a neighbor that isn't infected
+            g1.getEdges()[getIndex()]);
     bool spread = false;
     int size = neighbors.size();
+    //go over neighbors to look for a neighbor that isn't infected
     for (int i = 0; !spread & (i < size); i++) {
+        //use hasVirus to make sure whether has a virus (both infected and carrier)
         if ((neighbors[i] == 1) & !g1.hasVirus(i)) {
-            g1.spreadVirus(i);  //spread the virus to node i
+            g1.spreadVirus(i);  //spread the virus to node i (assign as carrier)
             Agent *nextVirus = new Virus(i);
             session.addAgent(*nextVirus); //add as an agent
-            delete nextVirus; //addAgent clone the nextVirus so need to delete nextVirus
+            delete nextVirus; //addAgent clone the nextVirus so we need to delete nextVirus
             spread = true;
         }
     }
@@ -58,7 +59,4 @@ Agent *Virus::clone() const {
     return new Virus(getIndex());
 }
 
-//empty destructor
-Agent::~Agent() {
 
-}

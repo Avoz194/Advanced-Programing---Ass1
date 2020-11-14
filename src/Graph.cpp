@@ -1,6 +1,4 @@
-#include <iostream>
 #include "../include/Graph.h"
-#include "../include/Tree.h"
 #include <deque>
 
 using namespace std;
@@ -13,12 +11,6 @@ Graph::Graph(std::vector<std::vector<int>> matrix) : edges(matrix), nodeStatusLi
     }
 }
 
-/*
-
-Graph::Graph(const Graph &copyGraph) : edges(copyGraph.getEdges()),
-                                       nodeStatusList(std::vector<char>(copyGraph.getEdges().size())) {
-}
-*/
 const bool Graph::isInfected(int nodeInd) const {
     return nodeStatusList[nodeInd] == 'I';
 }
@@ -68,7 +60,7 @@ Tree *Graph::BFS(int nodeInd, Session &sess) const {
             if (edges[tempTree->getLabel()][i] == 1 && (!visited[i])) {
                 Tree *toPush(Tree::createTree(sess, i));
                 tempTree->addChild(toPush);
-                q.push_back(toPush);  //TODO: check data leaking
+                q.push_back(toPush);
                 visited[i] = true;
             }
         }
