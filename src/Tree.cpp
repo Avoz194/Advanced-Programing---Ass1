@@ -25,7 +25,7 @@ const int &Tree::getLabel() const {
 }
 
 
-Tree *Tree::createTree(const Session &session, int rootLabel) {
+Tree *Tree::createTree(const Session &session, int rootLabel) { // create tree is based on the type of tree we choose
     switch (session.getTreeType()) {
         case MaxRank: {
             return new MaxRankTree(rootLabel);
@@ -47,14 +47,14 @@ Tree *Tree::createTree(const Session &session, int rootLabel) {
 CycleTree::CycleTree(int rootLabel, int currCycle) : Tree(rootLabel), currCycle(currCycle) {
 
 }
-
+// gives back the next node to isolate on a cycle tree
 int CycleTree::traceTree() {
     Tree *tree = this->clone();
-    int cC = this->currCycle;
+    int cC = this->currCycle; // a down counter to know how many iterations per cycle we have
     int op = node;
-    while (!tree->getChildren().empty() & (cC!=0)) {
+    while (!tree->getChildren().empty() & (cC!=0)) { //doing the trace tree for cycle until cc is 0 or there is no lefter node
         tree = tree->getChildren()[0];
-        op = tree->getLabel();
+        op = tree->getLabel(); // get the label of a node to isolate
         cC--;
     }
     return op;
@@ -87,13 +87,13 @@ int MaxRankTree::traceTree() { // commit BFS travel over the tree (due to code c
         int size1 = tempTree->getChildren().size();
         for (int i = 0; i < size1; i++) { //loop on tempTree children
             int size2 =tempTree->getChildren()[i]->getChildren().size();
-            if (size2 > tempMaxRank)
+            if (size2 > tempMaxRank) // finding if the new node with the max range
             {
                 tempMaxLabel = tempTree->getChildren()[i]->getLabel();
                 tempMaxRank = size2;
 
             }
-            q.push_back(tempTree->getChildren()[i]);
+            q.push_back(tempTree->getChildren()[i]); // order the all bfs tree
         }
     }
     return tempMaxLabel;
