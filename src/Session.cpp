@@ -200,8 +200,6 @@ Session &Session::operator=(const Session &other) {
 Session::Session(Session &&other) : g(move(other.g)), treeType(other.treeType), cycle(other.cycle),
                                     agents(move(other.agents)), pendingAgents(move(other.pendingAgents)),
                                     infectedQueue(move(other.infectedQueue)) {
-    other.agents.clear();
-    other.pendingAgents.clear();
 }
 
 //move assignment
@@ -215,9 +213,6 @@ Session &Session::operator=(Session &&other) {
         agents = move(other.agents);
         pendingAgents = move(other.pendingAgents);
         infectedQueue = move(other.infectedQueue);
-
-        other.agents.clear();
-        other.pendingAgents.clear();
     }
     return *this;
 }

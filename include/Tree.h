@@ -19,7 +19,7 @@ public:
 
     //rule of 5
     void clear();
-    void copy(const std::vector<Tree *>& other_children, const int& other_node);
+   void copy(const std::vector<Tree *>& other_children);
     virtual ~Tree(); //destructor
     Tree(const Tree &other); //copy constructor
     Tree(Tree &&other); //move constructor

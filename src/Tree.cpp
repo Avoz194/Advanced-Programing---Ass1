@@ -127,17 +127,15 @@ Tree::~Tree() {
     clear();
 }
 //copyConstructor
-void Tree::copy(const vector<Tree *> &other_children , const int &other_node)  {
-    children = other_children;
-    node = other_node;
+void Tree::copy(const vector<Tree *> &other_children)  {
     int size = other_children.size();
     for (int i = 0; (i < size) & !(other_children.empty()); i++) {
         if(other_children[i])
             children.push_back(other_children[i]->clone());
     }
 }
-Tree::Tree(const Tree &other) : node(other.node), children(other.children) {
-    copy(other.children,other.node);
+Tree::Tree(const Tree &other) : node(other.node), children(vector<Tree *>(other.getChildren().size())) {
+    copy(other.children); //deep copy of children vector
 }
 
 //copy assignment
@@ -146,25 +144,22 @@ Tree &Tree::operator=(const Tree& other) {
         return *this;
     }
     clear();
-    children = other.children;
     node = other.node;
-    copy(other.children, other.node);
+    children= vector<Tree *>(other.getChildren().size());
+    copy(other.children); //deep copy of children vector
     return *this;
 }
 
 //move constructor
-Tree::Tree(Tree &&other) : node(other.node), children(move(other.getChildren())) {
-    other.clear();
+Tree::Tree(Tree &&other) : node(other.node), children(move(other.children)) {
 }
 //move assignment
 Tree &Tree::operator=(Tree &&other) {
     if (!(children.empty())) {
         clear();
     }
-    children = move(other.getChildren());
-    node = other.getLabel();
-
-    other.children.clear();
+    node = other.node;
+    children = move(other.children);
     return *this;
 }
 
