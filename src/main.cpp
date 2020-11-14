@@ -5,7 +5,7 @@
 using namespace std;
 
 int main(int argc, char** argv){
-    if(argc != 2){ //TODO: maybe add 2&&0
+    if(argc != 2){
         cout << "usage cTrace <config_path>" << endl;
         return 0;
     }

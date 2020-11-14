@@ -4,7 +4,7 @@
 using namespace std;
 
 //base constructor
-Graph::Graph(std::vector<std::vector<int>> matrix) : edges(matrix), nodeStatusList(std::vector<char>(edges.size())) {
+Graph::Graph(vector<vector<int>> matrix) : edges(matrix), nodeStatusList(vector<char>(edges.size())) {
     int size = nodeStatusList.size();
     for (int i = 0; i < size; i++) {
         nodeStatusList[i] = 'H';
@@ -19,11 +19,11 @@ const bool Graph::hasVirus(int nodeInd) const {
     return (nodeStatusList[nodeInd] == 'C') | (nodeStatusList[nodeInd] == 'I');
 }
 
-const std::vector<std::vector<int>> &Graph::getEdges() const {
+const vector<vector<int>> &Graph::getEdges() const {
     return edges;
 }
 
-const std::vector<char> &Graph::getNodeStatusList() const {
+const vector<char> &Graph::getNodeStatusList() const {
     return nodeStatusList;
 }
 
@@ -47,8 +47,8 @@ Tree *Graph::BFS(int nodeInd, Session &sess) const {
     Tree *bfsTree = Tree::createTree(sess,
                                      nodeInd);
     int numOfNodes = edges.size();
-    std::vector<bool> visited(numOfNodes, false);
-    std::deque<Tree *> q;
+    vector<bool> visited(numOfNodes, false);
+    deque<Tree *> q;
     q.push_back(bfsTree);
     visited[nodeInd] = true;
 

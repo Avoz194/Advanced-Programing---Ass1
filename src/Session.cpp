@@ -11,7 +11,7 @@ Session::Session(const string &path) : g(vector<vector<int>>()), treeType(), cyc
         vector<Agent *>()), infectedQueue(queue<int>()) {
 
     //read JSON file
-    ifstream inP(path); //TODO: make sure works in MakeFile
+    ifstream inP(path);
     json inputFile;
     inP >> inputFile;
 
@@ -157,7 +157,6 @@ Session::~Session() {
     clear();
 }
 
-//copy constructor
 
 void Session::copy(const vector<Agent *> &other_agents, const vector<Agent *> &other_pendingAgents) {
     for (Agent *ag:other_agents) {
@@ -170,7 +169,7 @@ void Session::copy(const vector<Agent *> &other_agents, const vector<Agent *> &o
     }
 }
 
-
+//copy constructor
 
 Session::Session(const Session &other) : g(other.g), treeType(other.treeType), cycle(other.cycle),
                                          agents(vector<Agent *>(other.agents.size())),

@@ -14,8 +14,8 @@ public:
 
     virtual int traceTree()=0;
     virtual  Tree * clone() const =0;
-    const std::vector<Tree*>& getChildren() const; // for MRT TODO:Test to make sure activates correct function
-    const int &getLabel() const;  // for MRT TODO:Test to make sure activates correct function
+    const std::vector<Tree*>& getChildren() const; // for MRT
+    const int &getLabel() const;  // for MRT
 
     //rule of 5
     void clear();

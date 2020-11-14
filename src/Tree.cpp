@@ -15,12 +15,12 @@ void Tree::addChild(Tree* child){
     children.push_back(child);
 }
 
-const std::vector<Tree *> &
-Tree::getChildren() const { //TODO: MRT,CT,RT - Test to make sure activates correct function (maybe add Tree::)
+const vector<Tree *> &
+Tree::getChildren() const {
     return children;
 }
 
-const int &Tree::getLabel() const {//TODO: MRT,CT,RT - Test to make sure activates correct function
+const int &Tree::getLabel() const {
     return node;
 }
 
@@ -77,7 +77,7 @@ Tree *MaxRankTree::clone() const {
 int MaxRankTree::traceTree() { // commit BFS travel over the tree (due to code clearance decided not to add to BFS function logic)
     //  Tree *tree = this->clone();
 
-    std::deque<Tree *> q;
+    deque<Tree *> q;
     q.push_back(this);
     int tempMaxLabel = q[0]->getLabel();
     int tempMaxRank = this->getChildren().size();
