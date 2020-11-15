@@ -172,8 +172,8 @@ void Session::copy(const vector<Agent *> &other_agents, const vector<Agent *> &o
 //copy constructor
 
 Session::Session(const Session &other) : g(other.g), treeType(other.treeType), cycle(other.cycle),
-                                         agents(vector<Agent *>(other.agents.size())),
-                                         pendingAgents(vector<Agent *>(other.pendingAgents.size())),
+                                         agents(vector<Agent *>()),
+                                         pendingAgents(vector<Agent *>()),
                                          infectedQueue(other.infectedQueue) {
     copy(other.agents, other.pendingAgents); //deep copy for agent lists
 }
@@ -188,8 +188,8 @@ Session &Session::operator=(const Session &other) {
     g = other.g;
     treeType = other.treeType;
     cycle = other.cycle;
-    agents = vector<Agent *>(other.agents.size());
-    pendingAgents = vector<Agent *>(other.pendingAgents.size());
+    agents = vector<Agent *>();
+    pendingAgents = vector<Agent *>();
     infectedQueue = other.infectedQueue;
     copy(other.agents, other.pendingAgents); //deep copy for agent lists
 

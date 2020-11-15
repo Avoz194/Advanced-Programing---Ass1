@@ -130,11 +130,16 @@ Tree::~Tree() {
 void Tree::copy(const vector<Tree *> &other_children)  {
     int size = other_children.size();
     for (int i = 0; (i < size) & !(other_children.empty()); i++) {
-        if(other_children[i])
-            children.push_back(other_children[i]->clone());
+        if(other_children[i]) {
+            Tree * t1 = other_children[i]->clone();
+            children.push_back(t1);
+            if(!other_children[i]->getChildren().empty()){
+               t1->copy(other_children[i]->getChildren());
+            }
+        }
     }
 }
-Tree::Tree(const Tree &other) : node(other.node), children(vector<Tree *>(other.getChildren().size())) {
+Tree::Tree(const Tree &other) : node(other.node), children(vector<Tree *>()) {
     copy(other.children); //deep copy of children vector
 }
 
@@ -145,7 +150,7 @@ Tree &Tree::operator=(const Tree& other) {
     }
     clear();
     node = other.node;
-    children= vector<Tree *>(other.getChildren().size());
+    children= vector<Tree *>();
     copy(other.children); //deep copy of children vector
     return *this;
 }
@@ -155,12 +160,15 @@ Tree::Tree(Tree &&other) : node(other.node), children(move(other.children)) {
 }
 //move assignment
 Tree &Tree::operator=(Tree &&other) {
-    if (!(children.empty())) {
-        clear();
-    }
+    if (this != &other) {
+        if (!(children.empty())) {
+            clear();
+        }
+
     node = other.node;
-    children = move(other.children);
+    children = move(other.children);}
     return *this;
+
 }
 
 //-------------------------------------------------end Rule of 5--------------------------------------------------
