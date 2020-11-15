@@ -49,12 +49,12 @@ CycleTree::CycleTree(int rootLabel, int currCycle) : Tree(rootLabel), currCycle(
 }
 // gives back the next node to isolate on a cycle tree
 int CycleTree::traceTree() {
-    Tree &tree = *this;
+    Tree* tree = this;
     int cC = this->currCycle; // a down counter to know how many iterations per cycle we have
     int op = node;
-    while (!tree.getChildren().empty() & (cC!=0)) { //doing the trace tree for cycle until cc is 0 or there is no lefter node
-        tree = *(tree.getChildren()[0]);
-        op = tree.getLabel(); // get the label of a node to isolate
+    while (!tree->getChildren().empty() & (cC!=0)) { //doing the trace tree for cycle until cc is 0 or there is no lefter node
+        tree = tree->getChildren()[0];
+        op = tree->getLabel(); // get the label of a node to isolate
         cC--;
     }
     return op;
