@@ -183,7 +183,6 @@ Session &Session::operator=(const Session &other) {
     if (this == &other) {
         return *this;
     }
-    //Todo:add safety
     clear();
     g = other.g;
     treeType = other.treeType;
