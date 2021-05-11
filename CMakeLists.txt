@@ -1,6 +1,0 @@
-cmake_minimum_required(VERSION 3.17)
-project(Project01)
-
-set(CMAKE_CXX_STANDARD 11)
-
-add_executable(Project01 src/main.cpp src/Session.cpp src/Agent.cpp src/Graph.cpp src/Tree.cpp)
