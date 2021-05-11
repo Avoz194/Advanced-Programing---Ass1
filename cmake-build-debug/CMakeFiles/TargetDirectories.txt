@@ -1,3 +1,0 @@
-/home/rs/Desktop/Assignments/cTrace_p1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/rs/Desktop/Assignments/cTrace_p1/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/rs/Desktop/Assignments/cTrace_p1/cmake-build-debug/CMakeFiles/Project01.dir
